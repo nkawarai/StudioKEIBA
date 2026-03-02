@@ -1,7 +1,4 @@
 <Solution>
-  <Folder Name="/Solution Items/">
-    <File Path=".editorconfig" />
-  </Folder>
   <Project Path="src/StudioKEIBA.Core/StudioKEIBA.Core.csproj" />
   <Project Path="src/StudioKEIBA.HorseProfilerApp/StudioKEIBA.HorseProfilerApp.csproj" />
   <Project Path="src/StudioKEIBA.Netkeiba/StudioKEIBA.Netkeiba.csproj" />
