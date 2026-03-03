@@ -5,15 +5,15 @@
     /// <summary>
     /// ファクトリメソッド
     /// </summary>
-    static public class ClientFactory
+    static public class AgentFactory
     {
         /// <summary>
         /// 競走馬ページのスクレイピングクライアントを作成する
         /// </summary>
         /// <returns></returns>
-        static public IHorseScraper CreateHorseScraperClient()
+        static public IHorseScraper CreateHorseScraperAgent()
         {
-            return new HorseScraperClient();
+            return new HorseScraperAgent();
         }
     }
 }

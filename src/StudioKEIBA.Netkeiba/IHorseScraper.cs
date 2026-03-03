@@ -7,6 +7,6 @@
         /// </summary>
         /// <param name="uri"></param>
         /// <returns></returns>
-        IHorseProfile GetHorseProfile(Uri uri);
+        Task<IHorseProfile> GetHorseProfile(IHorseURL horseURL);
     }
 }

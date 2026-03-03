@@ -18,7 +18,7 @@
         /// <param name="horseID">netkeiba競走馬ID</param>
         internal HorseURL(IHorseID horseID)
         {
-            _url = new Uri($"https://db.netkeiba.com/horse/{horseID}/");
+            _url = new Uri($"https://db.netkeiba.com/horse/{horseID.Value}/");
         }
     }
 }

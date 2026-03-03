@@ -32,7 +32,6 @@
             label2 = new Label();
             _textBoxURL = new TextBox();
             _buttonExecute = new Button();
-            _buttonCancel = new Button();
             SuspendLayout();
             // 
             // label1
@@ -61,30 +60,19 @@
             // 
             // _buttonExecute
             // 
-            _buttonExecute.Location = new Point(162, 83);
+            _buttonExecute.Location = new Point(188, 63);
             _buttonExecute.Name = "_buttonExecute";
-            _buttonExecute.Size = new Size(129, 32);
+            _buttonExecute.Size = new Size(103, 32);
             _buttonExecute.TabIndex = 3;
             _buttonExecute.Text = "取得";
             _buttonExecute.UseVisualStyleBackColor = true;
             _buttonExecute.Click += _buttonExecute_Click;
             // 
-            // _buttonCancel
-            // 
-            _buttonCancel.Location = new Point(12, 83);
-            _buttonCancel.Name = "_buttonCancel";
-            _buttonCancel.Size = new Size(129, 32);
-            _buttonCancel.TabIndex = 4;
-            _buttonCancel.Text = "キャンセル";
-            _buttonCancel.UseVisualStyleBackColor = true;
-            _buttonCancel.Click += _buttonCancel_Click;
-            // 
             // FormInputHorseID
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(313, 127);
-            Controls.Add(_buttonCancel);
+            ClientSize = new Size(313, 105);
             Controls.Add(_buttonExecute);
             Controls.Add(_textBoxURL);
             Controls.Add(label2);
@@ -95,7 +83,7 @@
             Name = "FormInputHorseID";
             ShowIcon = false;
             ShowInTaskbar = false;
-            Text = "URL入力画面";
+            Text = "競走馬ID入力";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -106,6 +94,5 @@
         private Label label2;
         private TextBox _textBoxURL;
         private Button _buttonExecute;
-        private Button _buttonCancel;
     }
 }
