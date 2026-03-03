@@ -4,20 +4,22 @@ namespace StudioKEIBA.HorseProfilerApp
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
+        static public string AppName = "HorseProfiler";
+
         [STAThread]
         static void Main()
         {
             ApplicationConfiguration.Initialize();
 
+            var localAppDirPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var logDirPath = Path.Combine(localAppDirPath, AppName, "logs");
+            var logFilePath = Path.Combine(logDirPath, "log-.txt");
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.File("logs/log-.txt",
-                                rollingInterval: RollingInterval.Day, // 1日ごとに新ファイル作成
-                                retainedFileCountLimit: 30,            // 直近30日分だけ保持（古いのは自動削除）
-                                fileSizeLimitBytes: 10 * 1024 * 1024, // 1ファイル10MB制限
-                                rollOnFileSizeLimit: true)            // サイズ上限に達したら新しいファイルを作る
+                .WriteTo.File(path: logFilePath,
+                                rollingInterval: RollingInterval.Day,
+                                retainedFileCountLimit: 30,
+                                fileSizeLimitBytes: 10 * 1024 * 1024,
+                                rollOnFileSizeLimit: true)
                             .CreateLogger();
 
             Log.Information("アプリが起動しました。");
