@@ -5,7 +5,7 @@
     /// <summary>
     /// ファクトリメソッド
     /// </summary>
-    static public class Factory
+    static public class ClientFactory
     {
         /// <summary>
         /// 競走馬ページのスクレイピングクライアントを作成する

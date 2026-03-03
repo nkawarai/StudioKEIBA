@@ -1,16 +1,18 @@
-﻿namespace StudioKEIBA.HorseProfilerApp
+﻿using StudioKEIBA.Netkeiba;
+
+namespace StudioKEIBA.HorseProfilerApp
 {
-    public partial class FormInputURL : Form
+    public partial class FormInputHorseID : Form
     {
         /// <summary>
         /// 入力されたURL
         /// </summary>
-        public string URL { get; private set; } = string.Empty;
+        public IHorseURL? URL { get; private set; }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public FormInputURL()
+        public FormInputHorseID()
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterParent;
@@ -23,9 +25,16 @@
         /// <param name="e"></param>
         private void _buttonExecute_Click(object sender, EventArgs e)
         {
-            //TODO 入力されたURLの妥当性検証
-            URL = _textBoxURL.Text;
-            Close();
+            try
+            {
+                var horseID = ValueObjectFactory.CreateHorseID(_textBoxURL.Text);
+                URL = ValueObjectFactory.CreateHorseURL(horseID);
+                Close();
+            }
+            catch
+            {
+                Message.ShowInformationMessage(this, "入力されたnetkeiba競走馬IDが正しくありません。");
+            }
         }
 
         /// <summary>

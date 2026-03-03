@@ -1,6 +1,6 @@
 ﻿namespace StudioKEIBA.HorseProfilerApp
 {
-    partial class FormInputURL
+    partial class FormInputHorseID
     {
         /// <summary>
         /// Required designer variable.
@@ -40,9 +40,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(12, 16);
             label1.Name = "label1";
-            label1.Size = new Size(241, 15);
+            label1.Size = new Size(201, 15);
             label1.TabIndex = 0;
-            label1.Text = "netkeibaの競走馬ページのURLを入力してください";
+            label1.Text = "netkeibaの競走馬IDを入力してください。";
             // 
             // label2
             // 
@@ -56,12 +56,12 @@
             // 
             _textBoxURL.Location = new Point(12, 34);
             _textBoxURL.Name = "_textBoxURL";
-            _textBoxURL.Size = new Size(498, 23);
+            _textBoxURL.Size = new Size(279, 23);
             _textBoxURL.TabIndex = 2;
             // 
             // _buttonExecute
             // 
-            _buttonExecute.Location = new Point(381, 83);
+            _buttonExecute.Location = new Point(162, 83);
             _buttonExecute.Name = "_buttonExecute";
             _buttonExecute.Size = new Size(129, 32);
             _buttonExecute.TabIndex = 3;
@@ -79,11 +79,11 @@
             _buttonCancel.UseVisualStyleBackColor = true;
             _buttonCancel.Click += _buttonCancel_Click;
             // 
-            // FormInputURL
+            // FormInputHorseID
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(525, 127);
+            ClientSize = new Size(313, 127);
             Controls.Add(_buttonCancel);
             Controls.Add(_buttonExecute);
             Controls.Add(_textBoxURL);
@@ -92,7 +92,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             MinimizeBox = false;
-            Name = "FormInputURL";
+            Name = "FormInputHorseID";
             ShowIcon = false;
             ShowInTaskbar = false;
             Text = "URL入力画面";

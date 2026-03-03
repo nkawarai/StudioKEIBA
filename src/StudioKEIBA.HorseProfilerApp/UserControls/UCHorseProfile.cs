@@ -1,4 +1,6 @@
-﻿namespace StudioKEIBA.HorseProfilerApp.UserControls
+﻿using StudioKEIBA.Netkeiba;
+
+namespace StudioKEIBA.HorseProfilerApp.UserControls
 {
     public partial class UCHorseProfile : UserControl
     {
@@ -17,13 +19,13 @@
         /// <param name="e"></param>
         private void _buttonGetHorseProfile_Click(object sender, EventArgs e)
         {
-            string url = string.Empty;
-            using (var form = new FormInputURL())
+            IHorseURL? url;
+            using (var form = new FormInputHorseID())
             {
                 form.ShowDialog();
                 url = form.URL;
             }
-            if (string.IsNullOrWhiteSpace(url)) return;
+            if (url == null) return;
         }
     }
 }
