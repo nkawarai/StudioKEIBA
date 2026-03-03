@@ -1,6 +1,6 @@
 ﻿namespace StudioKEIBA.HorseProfilerApp
 {
-    partial class Form1
+    partial class FormMain
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
+            _mainPanel = new Panel();
+            SuspendLayout();
+            // 
+            // _mainPanel
+            // 
+            _mainPanel.Dock = DockStyle.Fill;
+            _mainPanel.Location = new Point(0, 0);
+            _mainPanel.Name = "_mainPanel";
+            _mainPanel.Size = new Size(800, 450);
+            _mainPanel.TabIndex = 0;
+            // 
+            // FormMain
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Text = "Form1";
+            Controls.Add(_mainPanel);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "FormMain";
+            Text = "競走馬プロファイリングツール　StudioKEIBA";
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private Panel _mainPanel;
     }
 }
