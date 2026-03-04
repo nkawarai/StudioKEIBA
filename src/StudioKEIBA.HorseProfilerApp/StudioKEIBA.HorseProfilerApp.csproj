@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StudioKEIBA.Core\StudioKEIBA.Core.csproj" />
     <ProjectReference Include="..\StudioKEIBA.Netkeiba\StudioKEIBA.Netkeiba.csproj" />
   </ItemGroup>
 

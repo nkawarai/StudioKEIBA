@@ -9,5 +9,10 @@
         /// URL
         /// </summary>
         Uri URL { get; }
+
+        /// <summary>
+        /// 競走馬ID
+        /// </summary>
+        IHorseID ID { get; }
     }
 }

@@ -1,12 +1,12 @@
-﻿namespace StudioKEIBA.Netkeiba
+﻿namespace StudioKEIBA
 {
     /// <summary>
-    /// 競走馬プロフィール
+    /// 種牡馬
     /// </summary>
-    public interface IHorseProfile
+    public interface IStallion
     {
         /// <summary>
-        /// 馬名
+        /// 種牡馬名
         /// </summary>
         string HorseName { get; }
     }

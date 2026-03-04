@@ -20,6 +20,7 @@ namespace StudioKEIBA.HorseProfilerApp.UserControls
         /// <param name="e"></param>
         async private void _buttonGetHorseProfile_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
             try
             {
                 IHorseURL? url;
@@ -31,16 +32,36 @@ namespace StudioKEIBA.HorseProfilerApp.UserControls
                 if (url == null) return;
 
                 var agent = AgentFactory.CreateHorseScraperAgent();
-                var profile = await agent.GetHorseProfile(url);
+                var horseName = await agent.GetHorseName(url);
+                Thread.Sleep(1000);
 
-                //UIに反映
-                _labelHorseName.Text = $"    {profile.HorseName}";
+                var pedigree = await agent.GetPedigree(url);
+                Thread.Sleep(1000);
+
+                _labelHorseName.Text = $"  {horseName}";
+                _labelPedigree.Text = $"父:{pedigree.Father.HorseName}  母父:{pedigree.MotherFather.HorseName}";
+
             }
             catch (Exception ex)
             {
                 Message.ShowErrorMessage(this, $"予期せぬエラーが発生しました。\n\n{ex}");
                 Log.Error(ex.ToString());
             }
+            finally
+            {
+                Cursor = Cursors.Default;
+            }
+        }
+
+        /// <summary>
+        /// Loadイベントハンドラ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _ucHorseProfileLoaded(object sender, EventArgs e)
+        {
+            _labelHorseName.Text = "競走馬情報を取得してください";
+            _labelPedigree.Text = string.Empty;
         }
     }
 }
