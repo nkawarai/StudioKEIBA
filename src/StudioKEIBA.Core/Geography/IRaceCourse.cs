@@ -1,18 +1,18 @@
 ﻿namespace StudioKEIBA
 {
     /// <summary>
-    /// 距離
+    /// 競馬場
     /// </summary>
-    public interface IDistance
+    public interface IRaceCourse
     {
         /// <summary>
-        /// メートル
+        /// 競馬場名
         /// </summary>
-        double Meter { get; }
+        string Name { get; }
 
         /// <summary>
-        /// ハロン
+        /// 表示名
         /// </summary>
-        double Furlong { get; }
+        string DisplayName { get; } 
     }
 }
