@@ -38,6 +38,9 @@ namespace StudioKEIBA.HorseProfilerApp.UserControls
                 var pedigree = await agent.GetPedigree(url);
                 Thread.Sleep(1000);
 
+                var raceResults = await agent.GetRaceResults(url);
+
+
                 _labelHorseName.Text = $"  {horseName}";
                 _labelPedigree.Text = $"父:{pedigree.Father.HorseName}  母父:{pedigree.MotherFather.HorseName}";
 

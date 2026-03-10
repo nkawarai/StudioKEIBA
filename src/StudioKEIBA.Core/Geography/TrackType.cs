@@ -3,6 +3,7 @@
     public enum TrackType
     {
         芝,
-        ダ
+        ダ,
+        Unknown
     }
 }
