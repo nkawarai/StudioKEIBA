@@ -1,4 +1,4 @@
-﻿namespace StudioKEIBA.HorseProfilerApp
+﻿namespace StudioKEIBA.HorseProfilerApp.Views
 {
     partial class FormMain
     {

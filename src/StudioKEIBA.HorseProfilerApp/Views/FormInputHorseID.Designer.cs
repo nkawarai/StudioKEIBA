@@ -1,4 +1,4 @@
-﻿namespace StudioKEIBA.HorseProfilerApp
+﻿namespace StudioKEIBA.HorseProfilerApp.Views
 {
     partial class FormInputHorseID
     {
@@ -30,7 +30,7 @@
         {
             label1 = new Label();
             label2 = new Label();
-            _textBoxURL = new TextBox();
+            _textBoxHorseID = new TextBox();
             _buttonExecute = new Button();
             SuspendLayout();
             // 
@@ -51,12 +51,12 @@
             label2.Size = new Size(0, 15);
             label2.TabIndex = 1;
             // 
-            // _textBoxURL
+            // _textBoxHorseID
             // 
-            _textBoxURL.Location = new Point(12, 34);
-            _textBoxURL.Name = "_textBoxURL";
-            _textBoxURL.Size = new Size(279, 23);
-            _textBoxURL.TabIndex = 2;
+            _textBoxHorseID.Location = new Point(12, 34);
+            _textBoxHorseID.Name = "_textBoxHorseID";
+            _textBoxHorseID.Size = new Size(279, 23);
+            _textBoxHorseID.TabIndex = 2;
             // 
             // _buttonExecute
             // 
@@ -74,7 +74,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(313, 105);
             Controls.Add(_buttonExecute);
-            Controls.Add(_textBoxURL);
+            Controls.Add(_textBoxHorseID);
             Controls.Add(label2);
             Controls.Add(label1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -92,7 +92,7 @@
 
         private Label label1;
         private Label label2;
-        private TextBox _textBoxURL;
+        private TextBox _textBoxHorseID;
         private Button _buttonExecute;
     }
 }

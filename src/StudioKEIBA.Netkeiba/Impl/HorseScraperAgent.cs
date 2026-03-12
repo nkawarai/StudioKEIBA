@@ -17,8 +17,9 @@ namespace StudioKEIBA.Netkeiba.Impl
         /// </summary>
         /// <param name="horseURL"></param>
         /// <returns></returns>
-        async public Task<string> GetHorseName(IHorseURL horseURL)
+        async public Task<string> GetHorseName(IHorseID horseID)
         {
+            var horseURL = ValueObjectFactory.CreateHorseURL(horseID);
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var config = Configuration.Default.WithDefaultLoader();
             var context = BrowsingContext.New(config);
@@ -35,7 +36,7 @@ namespace StudioKEIBA.Netkeiba.Impl
         /// </summary>
         /// <param name="horseURL"></param>
         /// <returns></returns>
-        async public Task<IPedigree> GetPedigree(IHorseURL horseURL)
+        async public Task<IPedigree> GetPedigree(IHorseID horseID)
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var config = Configuration.Default.WithDefaultLoader();
@@ -44,7 +45,7 @@ namespace StudioKEIBA.Netkeiba.Impl
             //血統はajaxで取得する必要があるため、APIを叩いてHTMLフラグメントを取得する
             using var httpClient = new HttpClient();
             var horsePedigreeUrl = $"https://db.netkeiba.com/horse/ajax_horse_pedigree.html"
-                       + $"?input=UTF-8&output=json&id={horseURL.ID.Value}";
+                       + $"?input=UTF-8&output=json&id={horseID.Value}";
 
             var horsePedigreeJson = await httpClient.GetStringAsync(horsePedigreeUrl);
             using var jsonDoc = JsonDocument.Parse(horsePedigreeJson);
@@ -73,13 +74,13 @@ namespace StudioKEIBA.Netkeiba.Impl
         /// </summary>
         /// <param name="horseURL"></param>
         /// <returns></returns>
-        async public Task<IEnumerable<IHorseRaceResult>> GetRaceResults(IHorseURL horseURL)
+        async public Task<IEnumerable<IHorseRaceResult>> GetRaceResults(IHorseID horseID)
         {
             var results = new List<IHorseRaceResult>(); // 戻り値
 
             using var httpClient = new HttpClient();
             var apiUrl = $"https://db.netkeiba.com/horse/ajax_horse_results.html"
-                       + $"?input=UTF-8&output=json&id={horseURL.ID.Value}";
+                       + $"?input=UTF-8&output=json&id={horseID.Value}";
             var json = await httpClient.GetStringAsync(apiUrl);
 
             using var jsonDoc = JsonDocument.Parse(json);

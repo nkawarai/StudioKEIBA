@@ -1,18 +1,21 @@
-namespace StudioKEIBA.HorseProfilerApp
+namespace StudioKEIBA.HorseProfilerApp.Views
 {
-    using UserControls;
+    using Services;
 
-    public partial class FormMain : Form
+    internal partial class FormMain : Form
     {
-        private UserControl _ucHorseProfile = new UCHorseProfile();
+        private IAppServices _appServices;
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public FormMain()
+        public FormMain(IAppServices appServices)
         {
             InitializeComponent();
-            _displayUserControl(_ucHorseProfile);
+            _appServices = appServices;
+
+            var ucHorseProfile = new UCHorseProfile(appServices);
+            _displayUserControl(ucHorseProfile);
         }
 
         /// <summary>

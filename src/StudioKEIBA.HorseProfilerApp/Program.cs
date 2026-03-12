@@ -2,6 +2,10 @@ using Serilog;
 
 namespace StudioKEIBA.HorseProfilerApp
 {
+    using StudioKEIBA.HorseProfilerApp.Services;
+    using StudioKEIBA.HorseProfilerApp.Services.Impl;
+    using Views;
+
     internal static class Program
     {
         static public string AppName = "HorseProfiler";
@@ -24,7 +28,12 @@ namespace StudioKEIBA.HorseProfilerApp
 
             Log.Information("アプリが起動しました。");
 
-            Application.Run(new FormMain());
+            //サービス
+            var horseProfilingService = ServiceFactory.CreateHorseProfilingService();
+            var appServices = AppServices.Create(horseProfilingService);
+
+            //メイン画面にサービス一覧を渡す
+            Application.Run(new FormMain(appServices));
         }
     }
 }

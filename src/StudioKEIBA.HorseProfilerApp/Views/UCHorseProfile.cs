@@ -1,16 +1,19 @@
 ﻿using Serilog;
-using StudioKEIBA.Netkeiba;
+using StudioKEIBA.HorseProfilerApp.Services;
 
-namespace StudioKEIBA.HorseProfilerApp.UserControls
+namespace StudioKEIBA.HorseProfilerApp.Views
 {
-    public partial class UCHorseProfile : UserControl
+    internal partial class UCHorseProfile : UserControl
     {
+        private IAppServices _appServices;
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public UCHorseProfile()
+        public UCHorseProfile(IAppServices appServices)
         {
             InitializeComponent();
+            _appServices = appServices;
         }
 
         /// <summary>
@@ -23,25 +26,18 @@ namespace StudioKEIBA.HorseProfilerApp.UserControls
             Cursor = Cursors.WaitCursor;
             try
             {
-                IHorseURL? url;
-                using (var form = new FormInputHorseID())
+                string horseID;
+                using (var form = new FormInputHorseID(_appServices.HorseProfilingService))
                 {
                     form.ShowDialog();
-                    url = form.URL;
+                    horseID = form.UserInput;
                 }
-                if (url == null) return;
+                if (string.IsNullOrWhiteSpace(horseID)) return;
 
-                var agent = AgentFactory.CreateHorseScraperAgent();
-                var horseName = await agent.GetHorseName(url);
-                Thread.Sleep(1000);
+                var profile = await _appServices.HorseProfilingService.MakeProfile(horseID);
 
-                var pedigree = await agent.GetPedigree(url);
-                Thread.Sleep(1000);
-
-                var raceResults = await agent.GetRaceResults(url);
-
-                _labelHorseName.Text = $"  {horseName}";
-                _labelPedigree.Text = $"父:{pedigree.Father.HorseName}  母父:{pedigree.MotherFather.HorseName}";
+                _labelHorseName.Text = $"  {profile.Name}";
+                _labelPedigree.Text = $"父:{profile.Pedigree.Father.HorseName}  母父:{profile.Pedigree.MotherFather.HorseName}";
 
             }
             catch (Exception ex)

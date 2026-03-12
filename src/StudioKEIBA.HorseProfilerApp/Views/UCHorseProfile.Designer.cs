@@ -1,4 +1,4 @@
-﻿namespace StudioKEIBA.HorseProfilerApp.UserControls
+﻿namespace StudioKEIBA.HorseProfilerApp.Views
 {
     partial class UCHorseProfile
     {

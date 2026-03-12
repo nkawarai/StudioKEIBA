@@ -36,5 +36,8 @@ namespace StudioKEIBA
             var diff = int.Parse(match.Groups[2].Value);
             return new HorseWeight(weight, diff);
         }
+
+        static public IHorseProfile CreateHorseProfile(string name, IPedigree pedigree, IEnumerable<IHorseRaceResult> horseRaceResults)
+            => new HorseProfile(name, pedigree, horseRaceResults);
     }
 }
