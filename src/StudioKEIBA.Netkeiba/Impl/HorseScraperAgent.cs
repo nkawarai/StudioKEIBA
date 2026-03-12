@@ -1,4 +1,5 @@
 ﻿using AngleSharp;
+using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
 using StudioKEIBA.Geography;
 using StudioKEIBA.Horse;
@@ -74,7 +75,8 @@ namespace StudioKEIBA.Netkeiba.Impl
         /// <returns></returns>
         async public Task<IEnumerable<IHorseRaceResult>> GetRaceResults(IHorseURL horseURL)
         {
-            var results = new List<IHorseRaceResult>();
+            var results = new List<IHorseRaceResult>(); // 戻り値
+
             using var httpClient = new HttpClient();
             var apiUrl = $"https://db.netkeiba.com/horse/ajax_horse_results.html"
                        + $"?input=UTF-8&output=json&id={horseURL.ID.Value}";
@@ -98,52 +100,79 @@ namespace StudioKEIBA.Netkeiba.Impl
                 var cells = row.QuerySelectorAll("td");
                 if (cells.Length < 25) continue;
 
+                #region ---- private method ----
+                string Text(int i) => cells[i].TextContent.Trim();
+
+                int Int(int i) => int.Parse(Text(i));
+
+                double Double(int i) => double.Parse(Text(i));
+
+                string ParseVenue(string raw)
+                    => Regex.Replace(raw, @"^\d+|\d+$", "");
+
+                string GetRaceUrl(IElement cell)
+                    => cell.QuerySelector("a")?.GetAttribute("href") ?? string.Empty;
+
+                (double First, double Last) ParsePace(string raw)
+                {
+                    var parts = raw.Split('-');
+                    if (parts.Length != 2)
+                    {
+                        throw new InvalidDataException($"レースペースを表す文字列をレースペース値に変換できません。\n文字列:{raw}");
+                    }
+                    double first = double.Parse(parts[0]);
+                    double last = double.Parse(parts[1]);
+                    return (first, last);
+                }
+
+                int? GetLastSpurtRank(IElement cell)
+                {
+                    var classes = cell.ClassList;
+                    if (classes.Contains("rank_1")) return 1;
+                    if (classes.Contains("rank_2")) return 2;
+                    if (classes.Contains("rank_3")) return 3;
+                    return null;
+                }
+                #endregion
+
                 //コース
-                var raceCourseName = Regex.Replace(cells[1].TextContent.Trim(), @"^\d+|\d+$", "");
-                var distanceString = cells[14].TextContent.Trim();
+                var raceCourseName = ParseVenue(Text(1));
+                var distanceString = Text(14);
                 var trackType = TrackTypeFactory.CreateFromString(distanceString.Substring(0, 1));
                 var distance = int.Parse(distanceString.Substring(1));
-                var track = TrackCatalog.Find(raceCourseName, trackType, distance);
+                var track = TrackCatalog.FindOrCreate(raceCourseName, trackType, distance);
 
                 //レース
-                var raceDate = DateTime.Parse(cells[0].TextContent.Trim());
-                var raceNumber = int.Parse(cells[3].TextContent.Trim());
-                var raceName = cells[4].TextContent.Trim();
-                int horseNum = int.Parse(cells[6].TextContent.Trim());
-                var trackCondition = TrackConditionCatalog.Find(cells[16].TextContent.Trim());
-                var weather = cells[2].TextContent.Trim();
-                var racePace = cells[22].TextContent.Trim().Split('-');
-                if (racePace == null || racePace.Length != 2) throw new FormatException(nameof(racePace));
-                var first3F = double.Parse(racePace[0]);
-                var last3F = double.Parse(racePace[1]);                    
-                var race = RaceFactory.Create(raceDate, track, raceNumber, raceName, horseNum, trackCondition,
-                    weather, first3F, last3F);
+                var raceDate = DateTime.Parse(Text(0));
+                var raceNumber = Int(3);
+                var raceName = Text(4);
+                var raceUri = new Uri(GetRaceUrl(cells[4]));
+                int horseNum = Int(6);
+                var trackCondition = TrackConditionCatalog.FindOrCreate(Text(16));
+                var weather = Text(2);
+                var pace = ParsePace(Text(22));
+                var first3F = pace.First;
+                var last3F = pace.Last;                    
+                var race = RaceFactory.Create(raceDate, track, raceNumber, raceName, raceUri, horseNum, trackCondition, weather, first3F, last3F);
 
-                //var result = HorseFactory.CreateHorseRaceResult();
+                //競走馬のレース結果
+                var wakuban = Int(7);
+                var umaban = Int(8);
+                var odds = Double(9);
+                var popularity = Int(10);
+                var rank = Int(11);
+                var jockeyName = Text(12);
+                var carriedWeight = Double(13);
+                var passingOrder = Text(21);
+                var agariTime = Double(23);
+                var agariLank = GetLastSpurtRank(cells[23]);
+                var horseWeight = HorseFactory.CreateHorseWeight(Text(24));
+                var horseRaceResult = HorseFactory.CreateHorseRaceResult(race, wakuban, umaban, odds, popularity, rank, jockeyName,
+                    carriedWeight, passingOrder, agariTime, agariLank, horseWeight);
+                results.Add(horseRaceResult);
 
-                //results.Add(new RaceResult(
-                //    Date: Text(0),
-                //    Venue: Text(1),
-                //    Weather: Text(2),
-                //    RaceNumber: Text(3),
-                //    RaceName: Text(4),
-                //    HorseCount: Text(6),   // 5は映像列のためスキップ
-                //    FrameNumber: Text(7),
-                //    HorseNumber: Text(8),
-                //    Odds: Text(9),
-                //    Popularity: Text(10),
-                //    Rank: Text(11),
-                //    Jockey: Text(12),
-                //    Weight: Text(13),
-                //    Distance: Text(14),
-                //    TrackCondition: Text(16),  // 15は水分量(非表示)のためスキップ
-                //    PassingOrder: Text(21),
-                //    Pace: Text(22),
-                //    LastSpurt: Text(23),
-                //    HorseWeight: Text(24)
-                //));
             }
-            return null; //仮
+            return results;
         }
     }
 }

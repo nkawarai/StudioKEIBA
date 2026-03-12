@@ -15,6 +15,9 @@
         /// </summary>
         public string DisplayName { get; }
 
+        public override string ToString()
+            => Name;
+
         /// <summary>
         /// ファクトリメソッド
         /// </summary>

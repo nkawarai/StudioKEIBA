@@ -7,11 +7,27 @@ namespace StudioKEIBA.Geography
     /// </summary>
     public class TrackCatalog
     {
-        public static ITrack? Find(string raceCourseName, TrackType trackType, int distanceM)
-            => _all.FirstOrDefault(t =>
+        public static ITrack FindOrCreate(string raceCourseName, TrackType trackType, int distanceM)
+        {
+            var candidate = _all.FirstOrDefault(t =>
                 t.RaceCourse.DisplayName == raceCourseName &&
                 t.TrackType == trackType &&
                 t.Distance.Meter == distanceM);
+            if (candidate != null)
+            {
+                return candidate;
+            }
+
+            //登録がない競馬場の場合
+            var raceCourse = RaceCourse.Create(raceCourseName, raceCourseName.Substring(0, 2));
+            return Track.Create(
+                raceCourse: raceCourse,
+                trackType: trackType,
+                distance: Distance.CreateFromMeter(distanceM),
+                straightDistance: Distance.CreateFromMeter(0),
+                hasSlope: false,
+                hasTightCorner: false);
+        }
 
         public static IReadOnlyList<ITrack> GetAll() => _all;
 

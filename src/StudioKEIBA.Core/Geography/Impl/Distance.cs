@@ -14,6 +14,9 @@
         /// </summary>
         public double Furlong { get => _meter / 200.0; }
 
+        public override string ToString()
+            => Meter.ToString();
+
         /// <summary>
         /// ファクトリメソッド
         /// </summary>

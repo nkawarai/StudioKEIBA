@@ -63,6 +63,6 @@
         /// <summary>
         /// 馬体重
         /// </summary>
-        double HorseWeight { get; }
+        IHorseWeight Weight { get; }
     }
 }

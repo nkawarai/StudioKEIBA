@@ -1,5 +1,6 @@
 ﻿using StudioKEIBA.Horse;
 using StudioKEIBA.Horse.Imple;
+using System.Text.RegularExpressions;
 
 namespace StudioKEIBA
 {
@@ -19,8 +20,21 @@ namespace StudioKEIBA
 
         static public IHorseRaceResult CreateHorseRaceResult(IRace race, int wakuban, int umaban, double odds, int populality,
             int rank, string jockeyName, double carriedWeight, string passingOrder,
-            double agariTime, int? agariLank, double horseWeight)
+            double agariTime, int? agariLank, IHorseWeight horseWeight)
             => new HorseRaceResult(race, wakuban, umaban, odds, populality, rank, jockeyName, carriedWeight, passingOrder,
                 agariTime, agariLank, horseWeight);
+
+        static public IHorseWeight CreateHorseWeight(string netkeibaWeightExpression)
+        {
+            var match = Regex.Match(netkeibaWeightExpression, @"(\d+)\(([+-]?\d+)\)");
+            if (!match.Success)
+            {
+                throw new ArgumentException(nameof(netkeibaWeightExpression));
+            }
+
+            var weight = int.Parse(match.Groups[1].Value);
+            var diff = int.Parse(match.Groups[2].Value);
+            return new HorseWeight(weight, diff);
+        }
     }
 }

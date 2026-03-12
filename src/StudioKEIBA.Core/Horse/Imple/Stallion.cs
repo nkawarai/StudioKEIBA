@@ -10,6 +10,9 @@
         /// </summary>
         public string HorseName { get; }
 
+        public override string ToString()
+            => HorseName;
+
         /// <summary>
         /// 隠蔽コンストラクタ
         /// </summary>

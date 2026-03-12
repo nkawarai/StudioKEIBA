@@ -40,7 +40,6 @@ namespace StudioKEIBA.HorseProfilerApp.UserControls
 
                 var raceResults = await agent.GetRaceResults(url);
 
-
                 _labelHorseName.Text = $"  {horseName}";
                 _labelPedigree.Text = $"父:{pedigree.Father.HorseName}  母父:{pedigree.MotherFather.HorseName}";
 

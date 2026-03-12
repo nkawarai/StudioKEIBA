@@ -10,7 +10,14 @@ namespace StudioKEIBA
         private static readonly ITrackCondition _furyo = new TrackCondition("不良", "不");
         private static readonly IReadOnlyList<ITrackCondition> _all = [_ryou, _yayaomo, _omo, _furyo];
 
-        static public ITrackCondition? Find(string displayName)
-            => _all.Where(x => x.DisplayName == displayName).FirstOrDefault();
+        static public ITrackCondition FindOrCreate(string displayName)
+        {
+            var candidate = _all.Where(x => x.DisplayName == displayName).FirstOrDefault();
+            if (candidate != null)
+            {
+                return candidate;
+            }
+            return new TrackCondition("", "");
+        }
     }
 }

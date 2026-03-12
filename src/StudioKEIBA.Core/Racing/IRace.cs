@@ -26,6 +26,11 @@
         string RaceName { get; }
 
         /// <summary>
+        /// レースページURL
+        /// </summary>
+        Uri RaceURL { get; }
+
+        /// <summary>
         /// 出走馬数
         /// </summary>
         int HorseNum { get; }

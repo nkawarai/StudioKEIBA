@@ -60,14 +60,17 @@
         /// <summary>
         /// 馬体重
         /// </summary>
-        public double HorseWeight { get; }
+        public IHorseWeight Weight { get; }
+
+        public override string ToString()
+            => $"{Race} {Rank}着";
 
         /// <summary>
         /// 隠蔽コンストラクタ
         /// </summary>
         internal HorseRaceResult(IRace race, int wakuban, int umaban, double odds, int populality,
             int rank, string jockeyName, double carriedWeight, string passingOrder,
-            double agariTime, int? agariLank, double horseWeight)
+            double agariTime, int? agariLank, IHorseWeight horseWeight)
         {
             Race = race;
             Wakuban = wakuban;
@@ -80,7 +83,7 @@
             PassingOrder = passingOrder;
             AgariTime = agariTime;
             AgariLank = agariLank;
-            HorseWeight = horseWeight;                           
+            Weight = horseWeight;                           
         }
     }
 }
