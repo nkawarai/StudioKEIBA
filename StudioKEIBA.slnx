@@ -2,6 +2,6 @@
   <Project Path="src/StudioKEIBA.Core/StudioKEIBA.Core.csproj" />
   <Project Path="src/StudioKEIBA.HorseProfilerApp/StudioKEIBA.HorseProfilerApp.csproj" />
   <Project Path="src/StudioKEIBA.Netkeiba/StudioKEIBA.Netkeiba.csproj" />
-  <Project Path="tests/StudioKEIBA.Core.Test/Test.StudioKEIBA.Core.csproj" />
-  <Project Path="tests/StudioKEIBA.Netkeiba.Test/Test.StudioKEIBA.Netkeiba.csproj" />
+  <Project Path="tests/Test.StudioKEIBA.Core/Test.StudioKEIBA.Core.csproj" />
+  <Project Path="tests/Test.StudioKEIBA.Netkeiba/Test.StudioKEIBA.Netkeiba.csproj" />
 </Solution>
