@@ -199,6 +199,25 @@ namespace StudioKEIBA.HorseProfilerApp.Views
                     },
                 },
             });
+
+            //行の色定義(着順)
+            _dataGridViewHorseRaceResult.CellFormatting += (sender, e) =>
+            {
+                if (e.RowIndex < 0) return;
+                var item = _dataGridViewHorseRaceResult.Rows[e.RowIndex].DataBoundItem as HorseRaceResultViewModel;
+                if (item == null) return;
+                switch (item.Rank)
+                {
+                    case "1":
+                    case "2":
+                    case "3":
+                        _dataGridViewHorseRaceResult.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.Gold;
+                        break;
+                    default:
+                        _dataGridViewHorseRaceResult.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                        break;
+                }
+            };
         }
     }
 }
