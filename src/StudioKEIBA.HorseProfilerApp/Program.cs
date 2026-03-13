@@ -15,6 +15,15 @@ namespace StudioKEIBA.HorseProfilerApp
         {
             ApplicationConfiguration.Initialize();
 
+            //二重起動の抑制
+            const string mutexName = "Global\\StudioKEIBA.HorseProfileApp";
+            using var mutex = new Mutex(initiallyOwned: true, mutexName, out bool createdNew);
+            if (!createdNew)
+            {
+                Message.ShowWarningMessage(null, "アプリケーションは既に起動しています。");
+                return;
+            }
+
             var localAppDirPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
             var logDirPath = Path.Combine(localAppDirPath, AppName, "logs");
             var logFilePath = Path.Combine(logDirPath, "log-.txt");
