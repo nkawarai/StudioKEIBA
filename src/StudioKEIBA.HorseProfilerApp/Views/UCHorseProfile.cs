@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using StudioKEIBA.HorseProfilerApp.Services;
+using StudioKEIBA.HorseProfilerApp.Views.ViewModels;
 
 namespace StudioKEIBA.HorseProfilerApp.Views
 {
@@ -39,6 +40,16 @@ namespace StudioKEIBA.HorseProfilerApp.Views
                 _labelHorseName.Text = $"  {profile.Name}";
                 _labelPedigree.Text = $"父:{profile.Pedigree.Father.HorseName}  母父:{profile.Pedigree.MotherFather.HorseName}";
 
+                var viewModels = new List<HorseRaceResultViewModel>();
+                var counter = 0;
+                foreach (var result in profile.HorseRaceResults)
+                {
+                    var viewModel = HorseRaceResultViewModel.FromHorseRaceResult(result);
+                    viewModels.Add(viewModel);
+                    counter++;
+                }
+                _dataGridViewHorseRaceResult.DataSource = viewModels;
+
             }
             catch (Exception ex)
             {
@@ -60,6 +71,134 @@ namespace StudioKEIBA.HorseProfilerApp.Views
         {
             _labelHorseName.Text = "競走馬情報を取得してください";
             _labelPedigree.Text = string.Empty;
+
+            InitHorseRaceResultDataGridView();
+        }
+
+        /// <summary>
+        /// 競走馬戦歴データテーブルを初期化する
+        /// </summary>
+        private void InitHorseRaceResultDataGridView()
+        {
+            _dataGridViewHorseRaceResult.AutoGenerateColumns = false;
+            _dataGridViewHorseRaceResult.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            _dataGridViewHorseRaceResult.ReadOnly = true;
+            _dataGridViewHorseRaceResult.RowHeadersVisible = false;
+            _dataGridViewHorseRaceResult.Font = new Font(_dataGridViewHorseRaceResult.Font.FontFamily, 10);
+            _dataGridViewHorseRaceResult.AutoSize = true;
+            _dataGridViewHorseRaceResult.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            _dataGridViewHorseRaceResult.MultiSelect = false;
+
+            // 列定義
+            _dataGridViewHorseRaceResult.Columns.AddRange(new DataGridViewColumn[]
+            {
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "日付",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.Date),
+                    Width = 100
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "レース名",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.RaceName),
+                    Width = 200
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "コース",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.RaceTrackName),
+                    Width = 110
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "馬場",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.TrackCondition),
+                    Width = 30
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "枠番",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.Wakuban),
+                    Width = 30,
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Alignment = DataGridViewContentAlignment.MiddleRight
+                    },
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "馬番",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.Umaban),
+                    Width = 30,
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Alignment = DataGridViewContentAlignment.MiddleRight
+                    },
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "着順",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.Rank),
+                    Width = 30,
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Alignment = DataGridViewContentAlignment.MiddleRight
+                    },
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "騎手",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.JockeyAndWeight),
+                    Width = 130
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "あがり",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.Agari),
+                    Width = 80
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "急坂",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.HasSlope),
+                    Width = 30,
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Alignment = DataGridViewContentAlignment.MiddleCenter
+                    },
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "小回",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.HasTightCorner),
+                    Width = 30,
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Alignment = DataGridViewContentAlignment.MiddleCenter
+                    },
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "短直",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.HomeStratchIsShort),
+                    Width = 30,
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Alignment = DataGridViewContentAlignment.MiddleCenter
+                    },
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "内外",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.UchiSoto),
+                    Width = 60,
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Alignment = DataGridViewContentAlignment.MiddleCenter
+                    },
+                },
+            });
         }
     }
 }

@@ -40,6 +40,10 @@
             IDistance straightDistance, bool hasSlope, bool hasTightCorner)
             => new Track(raceCourse, trackType, distance, straightDistance, hasSlope, hasTightCorner);
 
+        public override string ToString()
+            => $"{RaceCourse.DisplayName} {TrackType}{Distance.Meter}m";
+
+
         /// <summary>
         /// 隠蔽コンストラクタ
         /// </summary>

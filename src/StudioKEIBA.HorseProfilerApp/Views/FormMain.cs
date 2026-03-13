@@ -12,8 +12,9 @@ namespace StudioKEIBA.HorseProfilerApp.Views
         public FormMain(IAppServices appServices)
         {
             InitializeComponent();
-            _appServices = appServices;
+            WindowState = FormWindowState.Maximized;
 
+            _appServices = appServices;
             var ucHorseProfile = new UCHorseProfile(appServices);
             _displayUserControl(ucHorseProfile);
         }
