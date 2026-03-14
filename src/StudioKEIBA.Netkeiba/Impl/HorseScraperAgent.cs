@@ -106,7 +106,25 @@ namespace StudioKEIBA.Netkeiba.Impl
 
                 int Int(int i) => int.Parse(Text(i));
 
+                int? TryInt(int i)
+                {
+                    if (int.TryParse(Text(i), out var result))
+                    {
+                        return result;
+                    }
+                    return null;
+                }
+
                 double Double(int i) => double.Parse(Text(i));
+
+                double? TryDouble(int i)
+                {
+                    if (double.TryParse(Text(i), out var result))
+                    {
+                        return result;
+                    }
+                    return null;
+                }
 
                 string ParseVenue(string raw)
                     => Regex.Replace(raw, @"^\d+|\d+$", "");
@@ -114,13 +132,11 @@ namespace StudioKEIBA.Netkeiba.Impl
                 string GetRaceUrl(IElement cell)
                     => cell.QuerySelector("a")?.GetAttribute("href") ?? string.Empty;
 
-                (double First, double Last) ParsePace(string raw)
+                (double? First, double? Last) ParsePace(string raw)
                 {
+                    if (string.IsNullOrWhiteSpace(raw)) return (null, null);
                     var parts = raw.Split('-');
-                    if (parts.Length != 2)
-                    {
-                        throw new InvalidDataException($"レースペースを表す文字列をレースペース値に変換できません。\n文字列:{raw}");
-                    }
+                    if (parts.Length != 2) return (null, null);
                     double first = double.Parse(parts[0]);
                     double last = double.Parse(parts[1]);
                     return (first, last);
@@ -145,7 +161,7 @@ namespace StudioKEIBA.Netkeiba.Impl
 
                 //レース
                 var raceDate = DateTime.Parse(Text(0));
-                var raceNumber = Int(3);
+                var raceNumber = TryInt(3);
                 var raceName = Text(4);
                 var raceUri = new Uri(GetRaceUrl(cells[4]));
                 int horseNum = Int(6);
@@ -157,7 +173,7 @@ namespace StudioKEIBA.Netkeiba.Impl
                 var race = RaceFactory.Create(raceDate, track, raceNumber, raceName, raceUri, horseNum, trackCondition, weather, first3F, last3F);
 
                 //競走馬のレース結果
-                var wakuban = Int(7);
+                var wakuban = TryInt(7);
                 var umaban = Int(8);
                 var odds = Double(9);
                 var popularity = Int(10);
@@ -165,7 +181,7 @@ namespace StudioKEIBA.Netkeiba.Impl
                 var jockeyName = Text(12);
                 var carriedWeight = Double(13);
                 var passingOrder = Text(21);
-                var agariTime = Double(23);
+                var agariTime = TryDouble(23);
                 var agariLank = GetLastSpurtRank(cells[23]);
                 var horseWeight = HorseFactory.CreateHorseWeight(Text(24));
                 var horseRaceResult = HorseFactory.CreateHorseRaceResult(race, wakuban, umaban, odds, popularity, rank, jockeyName,

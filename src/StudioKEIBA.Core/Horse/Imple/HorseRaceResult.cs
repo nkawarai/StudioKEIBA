@@ -10,7 +10,7 @@
         /// <summary>
         /// 枠番
         /// </summary>
-        public int Wakuban { get; }
+        public int? Wakuban { get; }
 
         /// <summary>
         /// 馬番
@@ -20,12 +20,12 @@
         /// <summary>
         /// オッズ
         /// </summary>
-        public double Odds { get; }
+        public double? Odds { get; }
 
         /// <summary>
         /// 単勝人気
         /// </summary>
-        public int Popularity { get; }
+        public int? Popularity { get; }
 
         /// <summary>
         /// 着順
@@ -50,7 +50,8 @@
         /// <summary>
         /// あがり
         /// </summary>
-        public double AgariTime { get; }
+        /// <remarks>海外のレースはあがりがない場合がある</remarks>
+        public double? AgariTime { get; }
 
         /// <summary>
         /// あがり順位
@@ -68,9 +69,9 @@
         /// <summary>
         /// 隠蔽コンストラクタ
         /// </summary>
-        internal HorseRaceResult(IRace race, int wakuban, int umaban, double odds, int populality,
+        internal HorseRaceResult(IRace race, int? wakuban, int umaban, double odds, int populality,
             int rank, string jockeyName, double carriedWeight, string passingOrder,
-            double agariTime, int? agariLank, IHorseWeight horseWeight)
+            double? agariTime, int? agariLank, IHorseWeight horseWeight)
         {
             Race = race;
             Wakuban = wakuban;

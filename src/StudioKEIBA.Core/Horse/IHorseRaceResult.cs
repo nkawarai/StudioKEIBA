@@ -13,7 +13,8 @@
         /// <summary>
         /// 枠番
         /// </summary>
-        int Wakuban { get; }
+        /// <remarks>海外のレースは枠番がない</remarks>
+        int? Wakuban { get; }
 
         /// <summary>
         /// 馬番
@@ -23,12 +24,12 @@
         /// <summary>
         /// オッズ
         /// </summary>
-        double Odds { get; }
+        double? Odds { get; }
 
         /// <summary>
         /// 単勝人気
         /// </summary>
-        int Popularity { get; }
+        int? Popularity { get; }
 
         /// <summary>
         /// 着順
@@ -53,7 +54,8 @@
         /// <summary>
         /// あがり
         /// </summary>
-        double AgariTime { get; }
+        /// <remarks>海外のレースはあがりがない場合がある</remarks>
+        double? AgariTime { get; }
 
         /// <summary>
         /// あがり順位

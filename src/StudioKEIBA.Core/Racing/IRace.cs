@@ -18,7 +18,7 @@
         /// <summary>
         /// R番号
         /// </summary>
-        int RaceNumber { get; }
+        int? RaceNumber { get; }
 
         /// <summary>
         /// レース名
@@ -48,11 +48,11 @@
         /// <summary>
         /// 前半3Fペース
         /// </summary>
-        double First3FTime { get; }
+        double? First3FTime { get; }
 
         /// <summary>
         /// 後半3Fペース
         /// </summary>
-        double Last3FTime { get; }
+        double? Last3FTime { get; }
     }
 }

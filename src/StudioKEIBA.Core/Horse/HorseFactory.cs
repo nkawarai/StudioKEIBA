@@ -18,9 +18,9 @@ namespace StudioKEIBA
         static public IPedigree CreatePedigree(string fatherHorseName, string motherFatherHorseName)
             => new Pedigree(CreateStallion(fatherHorseName), CreateStallion(motherFatherHorseName));
 
-        static public IHorseRaceResult CreateHorseRaceResult(IRace race, int wakuban, int umaban, double odds, int populality,
+        static public IHorseRaceResult CreateHorseRaceResult(IRace race, int? wakuban, int umaban, double odds, int populality,
             int rank, string jockeyName, double carriedWeight, string passingOrder,
-            double agariTime, int? agariLank, IHorseWeight horseWeight)
+            double? agariTime, int? agariLank, IHorseWeight horseWeight)
             => new HorseRaceResult(race, wakuban, umaban, odds, populality, rank, jockeyName, carriedWeight, passingOrder,
                 agariTime, agariLank, horseWeight);
 

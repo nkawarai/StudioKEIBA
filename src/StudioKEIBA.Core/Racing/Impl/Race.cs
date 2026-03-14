@@ -15,7 +15,7 @@
         /// <summary>
         /// R番号
         /// </summary>
-        public int RaceNumber { get; }
+        public int? RaceNumber { get; }
 
         /// <summary>
         /// レース名
@@ -45,12 +45,12 @@
         /// <summary>
         /// 前半3Fペース
         /// </summary>
-        public double First3FTime { get; }
+        public double? First3FTime { get; }
 
         /// <summary>
         /// 後半3Fペース
         /// </summary>
-        public double Last3FTime { get; }
+        public double? Last3FTime { get; }
 
         public override string ToString()
             => RaceName;
@@ -58,8 +58,8 @@
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        internal Race(DateTime raceDate, ITrack raceTrack, int raceNumber, string raceName, Uri raceUri, int horseNum,
-            ITrackCondition condition, string weather, double first3F, double last3F)
+        internal Race(DateTime raceDate, ITrack raceTrack, int? raceNumber, string raceName, Uri raceUri, int horseNum,
+            ITrackCondition condition, string weather, double? first3F, double? last3F)
         {
              RaceDate = raceDate;
             RaceTrack = raceTrack;

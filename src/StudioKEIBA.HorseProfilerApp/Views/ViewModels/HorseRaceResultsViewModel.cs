@@ -99,7 +99,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views.ViewModels
             viewModel.Wakuban = result.Wakuban.ToString();
             viewModel.Rank = result.Rank.ToString();
             viewModel.JockeyAndWeight = $"{result.JockeyName}({result.CarriedWeight.ToString("F1")}kg)";
-            viewModel.Agari = result.AgariTime.ToString("F1");
+            viewModel.Agari = result.AgariTime?.ToString("F1");
             if (result.AgariLank.HasValue)
             {
                 viewModel.Agari += $"({result.AgariLank}位)";
