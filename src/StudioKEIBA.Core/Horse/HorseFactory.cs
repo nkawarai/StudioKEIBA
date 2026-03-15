@@ -29,7 +29,7 @@ namespace StudioKEIBA
             var match = Regex.Match(netkeibaWeightExpression, @"(\d+)\(([+-]?\d+)\)");
             if (!match.Success)
             {
-                throw new ArgumentException(nameof(netkeibaWeightExpression));
+                return new HorseWeight(null);              
             }
 
             var weight = int.Parse(match.Groups[1].Value);

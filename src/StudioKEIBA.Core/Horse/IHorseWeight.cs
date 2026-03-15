@@ -8,7 +8,7 @@
         /// <summary>
         /// 重さ[kg]
         /// </summary>
-        int ValueKg { get; }
+        int? ValueKg { get; }
 
         /// <summary>
         /// 表示形式
