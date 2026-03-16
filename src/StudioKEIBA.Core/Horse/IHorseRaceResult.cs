@@ -34,7 +34,7 @@
         /// <summary>
         /// 着順
         /// </summary>
-        int Rank { get; }
+        IRank Rank { get; }
 
         /// <summary>
         /// 騎手

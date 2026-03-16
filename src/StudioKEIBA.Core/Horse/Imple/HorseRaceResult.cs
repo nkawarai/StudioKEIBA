@@ -30,7 +30,7 @@
         /// <summary>
         /// 着順
         /// </summary>
-        public int Rank { get; }
+        public IRank Rank { get; }
 
         /// <summary>
         /// 騎手
@@ -69,8 +69,8 @@
         /// <summary>
         /// 隠蔽コンストラクタ
         /// </summary>
-        internal HorseRaceResult(IRace race, int? wakuban, int umaban, double odds, int populality,
-            int rank, string jockeyName, double carriedWeight, string passingOrder,
+        internal HorseRaceResult(IRace race, int? wakuban, int umaban, double? odds, int? populality,
+            IRank rank, string jockeyName, double carriedWeight, string passingOrder,
             double? agariTime, int? agariLank, IHorseWeight horseWeight)
         {
             Race = race;

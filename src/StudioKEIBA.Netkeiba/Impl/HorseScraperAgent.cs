@@ -175,9 +175,9 @@ namespace StudioKEIBA.Netkeiba.Impl
                 //競走馬のレース結果
                 var wakuban = TryInt(7);
                 var umaban = Int(8);
-                var odds = Double(9);
-                var popularity = Int(10);
-                var rank = Int(11);
+                var odds = TryDouble(9);
+                var popularity = TryInt(10);
+                var rank = HorseFactory.CreateRank(Text(11));
                 var jockeyName = Text(12);
                 var carriedWeight = Double(13);
                 var passingOrder = Text(21);

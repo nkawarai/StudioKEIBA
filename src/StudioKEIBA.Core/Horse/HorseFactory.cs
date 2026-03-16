@@ -18,8 +18,8 @@ namespace StudioKEIBA
         static public IPedigree CreatePedigree(string fatherHorseName, string motherFatherHorseName)
             => new Pedigree(CreateStallion(fatherHorseName), CreateStallion(motherFatherHorseName));
 
-        static public IHorseRaceResult CreateHorseRaceResult(IRace race, int? wakuban, int umaban, double odds, int populality,
-            int rank, string jockeyName, double carriedWeight, string passingOrder,
+        static public IHorseRaceResult CreateHorseRaceResult(IRace race, int? wakuban, int umaban, double? odds, int? populality,
+            IRank rank, string jockeyName, double carriedWeight, string passingOrder,
             double? agariTime, int? agariLank, IHorseWeight horseWeight)
             => new HorseRaceResult(race, wakuban, umaban, odds, populality, rank, jockeyName, carriedWeight, passingOrder,
                 agariTime, agariLank, horseWeight);
@@ -39,5 +39,8 @@ namespace StudioKEIBA
 
         static public IHorseProfile CreateHorseProfile(string name, IPedigree pedigree, IEnumerable<IHorseRaceResult> horseRaceResults)
             => new HorseProfile(name, pedigree, horseRaceResults);
+
+        static public IRank CreateRank(string rankStr)
+            => new Rank(rankStr);
     }
 }
