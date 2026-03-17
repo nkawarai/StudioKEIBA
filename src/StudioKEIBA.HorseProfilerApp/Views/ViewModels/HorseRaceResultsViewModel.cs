@@ -1,4 +1,5 @@
 ﻿using StudioKEIBA.Horse;
+using StudioKEIBA.HorseProfilerApp.Views.Extensions;
 
 namespace StudioKEIBA.HorseProfilerApp.Views.ViewModels
 {
@@ -85,7 +86,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views.ViewModels
         /// <summary>
         /// factoryメソッド
         /// </summary>
-        static public HorseRaceResultViewModel FromHorseRaceResult(IHorseRaceResult result)
+        static public HorseRaceResultViewModel FromHorseRaceResult(IHorseRaceResult result, IHorseRaceResult? prev)
         {
             var viewModel = new HorseRaceResultViewModel();
             viewModel.Date = result.Race.RaceDate.ToShortDateString();
@@ -102,7 +103,6 @@ namespace StudioKEIBA.HorseProfilerApp.Views.ViewModels
                 viewModel.Agari += $"({result.AgariLank}位)";
             }
 
-            //内枠・外枠
             if (result.Wakuban <= 2)
             {
                 viewModel.UchiSoto = "内枠";
@@ -112,21 +112,20 @@ namespace StudioKEIBA.HorseProfilerApp.Views.ViewModels
                 viewModel.UchiSoto = "外枠";
             }
 
-            //急坂
             if (result.Race.RaceTrack.HasSlopeInStraight.HasValue || result.Race.RaceTrack.HasSlopeInStraight == true)
             {
                 viewModel.HasSlope = "〇";
             }
-            //小回り
             if (result.Race.RaceTrack.HasTightCorner.HasValue || result.Race.RaceTrack.HasTightCorner == true)
             {
                 viewModel.HasTightCorner = "〇";
             }
-            // 短直線
             if (result.Race.RaceTrack.StraightLength != null && result.Race.RaceTrack.StraightLength.Meter < 400.0)
             {
                 viewModel.HomeStratchIsShort = "〇";
             }
+            if (prev == null) return viewModel;
+            viewModel.DistanceRotation = result.Race.RaceTrack.ResolveDistanceRotation(prev.Race.RaceTrack);
 
 
             return viewModel;

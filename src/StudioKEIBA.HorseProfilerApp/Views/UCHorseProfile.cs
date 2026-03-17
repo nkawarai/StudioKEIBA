@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using StudioKEIBA.HorseProfilerApp.Services;
+using StudioKEIBA.HorseProfilerApp.Views.Extensions;
 using StudioKEIBA.HorseProfilerApp.Views.ViewModels;
 using System.Windows.Forms;
 
@@ -40,16 +41,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views
 
                 _labelHorseName.Text = $"  {profile.Name}";
                 _labelPedigree.Text = $"父:{profile.Pedigree.Father.HorseName}  母父:{profile.Pedigree.MotherFather.HorseName}";
-
-                var viewModels = new List<HorseRaceResultViewModel>();
-                var counter = 0;
-                foreach (var result in profile.HorseRaceResults)
-                {
-                    var viewModel = HorseRaceResultViewModel.FromHorseRaceResult(result);
-                    viewModels.Add(viewModel);
-                    counter++;
-                }
-                _dataGridViewHorseRaceResult.DataSource = viewModels;
+                _dataGridViewHorseRaceResult.DataSource = profile.HorseRaceResults.ConvertToViewModels();
                 _dataGridViewHorseRaceResult.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
                 _dataGridViewHorseRaceResult.Visible = true;
 
@@ -153,6 +145,15 @@ namespace StudioKEIBA.HorseProfilerApp.Views
                 {
                     HeaderText = "あがり",
                     DataPropertyName = nameof(HorseRaceResultViewModel.Agari),
+                },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "距離ローテ",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.DistanceRotation),
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Alignment = DataGridViewContentAlignment.MiddleCenter
+                    },
                 },
                 new DataGridViewTextBoxColumn
                 {
