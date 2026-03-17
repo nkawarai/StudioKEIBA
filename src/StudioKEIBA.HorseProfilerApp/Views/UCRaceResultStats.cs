@@ -4,7 +4,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views
 {
     public partial class UCRaceResultStats : UserControl
     {
-        public UCRaceResultStats(IRaceStats stats)
+        public UCRaceResultStats(IRaceStats? stats)
         {
             InitializeComponent();
             if (stats == null) return;
@@ -21,17 +21,16 @@ namespace StudioKEIBA.HorseProfilerApp.Views
             _dataGridViewRaceStats.AllowUserToResizeRows = false;
             _dataGridViewRaceStats.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            foreach (DataGridViewColumn column in _dataGridViewRaceStats.Columns)
-            {
-                column.SortMode = DataGridViewColumnSortMode.NotSortable;
-            }
+            //行選択不可ができないので、選択時の色をデフォルト色にしてごまかしている
+            _dataGridViewRaceStats.DefaultCellStyle.SelectionBackColor = _dataGridViewRaceStats.DefaultCellStyle.BackColor;
+            _dataGridViewRaceStats.DefaultCellStyle.SelectionForeColor = _dataGridViewRaceStats.DefaultCellStyle.ForeColor;
 
             _dataGridViewRaceStats.Columns.AddRange(new DataGridViewColumn[]
             {
                 new DataGridViewTextBoxColumn
                 {
                     HeaderText = "着別度数",
-                    Name = nameof(IRaceStats.DisplayString),
+                    DataPropertyName = nameof(IRaceStats.DisplayString),
                     DefaultCellStyle = new DataGridViewCellStyle
                     {
                         Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -40,7 +39,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views
                 new DataGridViewTextBoxColumn
                 {
                     HeaderText = "勝率",
-                    Name = nameof(IRaceStats.WinRate),
+                    DataPropertyName = nameof(IRaceStats.WinRate),
                     DefaultCellStyle = new DataGridViewCellStyle
                     {
                         Alignment = DataGridViewContentAlignment.MiddleCenter,
@@ -50,7 +49,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views
                 new DataGridViewTextBoxColumn
                 {
                     HeaderText = "複勝率",
-                    Name = nameof(IRaceStats.Top3Rate),
+                    DataPropertyName = nameof(IRaceStats.Top3Rate),
                     DefaultCellStyle = new DataGridViewCellStyle
                     {
                         Alignment = DataGridViewContentAlignment.MiddleCenter,
@@ -68,6 +67,15 @@ namespace StudioKEIBA.HorseProfilerApp.Views
 
             _dataGridViewRaceStats.DataSource = new[] { row }.ToList();
             _dataGridViewRaceStats.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
+            //ソートはしない
+            foreach (DataGridViewColumn column in _dataGridViewRaceStats.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable;
+            }
+
+            // 列ヘッダはすべて中央寄せ
+            _dataGridViewRaceStats.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
         }
     }
 }

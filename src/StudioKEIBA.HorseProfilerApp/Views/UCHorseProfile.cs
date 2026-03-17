@@ -2,6 +2,7 @@
 using StudioKEIBA.HorseProfilerApp.Extensions;
 using StudioKEIBA.HorseProfilerApp.Services;
 using StudioKEIBA.HorseProfilerApp.Views.ViewModels;
+using StudioKEIBA.Racing;
 
 namespace StudioKEIBA.HorseProfilerApp.Views
 {
@@ -45,7 +46,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views
                 _dataGridViewHorseRaceResult.Visible = true;
 
                 var raceStatsVM = profile.HorseRaceResults.ConvertToRaceStatsViewModel();
-
+                SetRaceStats(raceStatsVM);
             }
             catch (Exception ex)
             {
@@ -233,6 +234,19 @@ namespace StudioKEIBA.HorseProfilerApp.Views
 
             //画面起動時は非表示
             _dataGridViewHorseRaceResult.Visible = false;
+        }
+
+        private void SetRaceStats(RaceStatsViewModel statsVM)
+        {
+            SetStatsControl(_panelRaceStatsSlope, statsVM.SlopeStats);
+        }
+
+        private void SetStatsControl(Panel panel, IRaceStats? stats)
+        {
+            panel.Controls.Clear();
+            var control = new UCRaceResultStats(stats);
+            control.Dock = DockStyle.Fill;
+            panel.Controls.Add(control);
         }
     }
 }

@@ -33,8 +33,11 @@
             _labelPedigree = new Label();
             _dataGridViewHorseRaceResult = new DataGridView();
             groupBox1 = new GroupBox();
+            this._groupBoxSlope = new GroupBox();
+            _panelRaceStatsSlope = new Panel();
             ((System.ComponentModel.ISupportInitialize)_dataGridViewHorseRaceResult).BeginInit();
             groupBox1.SuspendLayout();
+            this._groupBoxSlope.SuspendLayout();
             SuspendLayout();
             // 
             // _buttonGetHorseProfile
@@ -97,10 +100,29 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "戦歴";
             // 
+            // _groupBoxSlope
+            // 
+            this._groupBoxSlope.Controls.Add(_panelRaceStatsSlope);
+            this._groupBoxSlope.Location = new Point(21, 151);
+            this._groupBoxSlope.Name = "_groupBoxSlope";
+            this._groupBoxSlope.Size = new Size(298, 131);
+            this._groupBoxSlope.TabIndex = 5;
+            this._groupBoxSlope.TabStop = false;
+            this._groupBoxSlope.Text = "急坂コース";
+            // 
+            // _panelRaceStatsSlope
+            // 
+            _panelRaceStatsSlope.Dock = DockStyle.Fill;
+            _panelRaceStatsSlope.Location = new Point(3, 25);
+            _panelRaceStatsSlope.Name = "_panelRaceStatsSlope";
+            _panelRaceStatsSlope.Size = new Size(292, 103);
+            _panelRaceStatsSlope.TabIndex = 0;
+            // 
             // UCHorseProfile
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(this._groupBoxSlope);
             Controls.Add(groupBox1);
             Controls.Add(_labelPedigree);
             Controls.Add(_labelHorseName);
@@ -112,6 +134,7 @@
             Load += _ucHorseProfileLoaded;
             ((System.ComponentModel.ISupportInitialize)_dataGridViewHorseRaceResult).EndInit();
             groupBox1.ResumeLayout(false);
+            this._groupBoxSlope.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -123,5 +146,7 @@
         private Label _labelPedigree;
         private DataGridView _dataGridViewHorseRaceResult;
         private GroupBox groupBox1;
+        private GroupBox _groupBoxSlope;
+        private Panel _panelRaceStatsSlope;
     }
 }
