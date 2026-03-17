@@ -1,5 +1,5 @@
 ﻿using StudioKEIBA.Horse;
-using StudioKEIBA.HorseProfilerApp.Views.Extensions;
+using StudioKEIBA.HorseProfilerApp.Extensions;
 
 namespace StudioKEIBA.HorseProfilerApp.Views.ViewModels
 {

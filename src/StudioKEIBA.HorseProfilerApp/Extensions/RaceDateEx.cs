@@ -1,4 +1,4 @@
-﻿namespace StudioKEIBA.HorseProfilerApp.Views.Extensions
+﻿namespace StudioKEIBA.HorseProfilerApp.Extensions
 {
     static public class RaceDateEx
     {

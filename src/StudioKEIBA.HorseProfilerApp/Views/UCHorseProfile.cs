@@ -1,8 +1,7 @@
 ﻿using Serilog;
+using StudioKEIBA.HorseProfilerApp.Extensions;
 using StudioKEIBA.HorseProfilerApp.Services;
-using StudioKEIBA.HorseProfilerApp.Views.Extensions;
 using StudioKEIBA.HorseProfilerApp.Views.ViewModels;
-using System.Windows.Forms;
 
 namespace StudioKEIBA.HorseProfilerApp.Views
 {
@@ -41,9 +40,11 @@ namespace StudioKEIBA.HorseProfilerApp.Views
 
                 _labelHorseName.Text = $"  {profile.Name}";
                 _labelPedigree.Text = $"父:{profile.Pedigree.Father.HorseName}  母父:{profile.Pedigree.MotherFather.HorseName}";
-                _dataGridViewHorseRaceResult.DataSource = profile.HorseRaceResults.ConvertToViewModels();
+                _dataGridViewHorseRaceResult.DataSource = profile.HorseRaceResults.ConvertToHorseRaceResultViewModels();
                 _dataGridViewHorseRaceResult.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
                 _dataGridViewHorseRaceResult.Visible = true;
+
+                var raceStatsVM = profile.HorseRaceResults.ConvertToRaceStatsViewModel();
 
             }
             catch (Exception ex)

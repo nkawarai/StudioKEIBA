@@ -1,6 +1,6 @@
 ﻿using StudioKEIBA.Geography;
 
-namespace StudioKEIBA.HorseProfilerApp.Views.Extensions
+namespace StudioKEIBA.HorseProfilerApp.Extensions
 {
 
     static public class TrackEx
