@@ -24,9 +24,9 @@ namespace StudioKEIBA.Geography
                 raceCourse: raceCourse,
                 trackType: trackType,
                 distance: Distance.CreateFromMeter(distanceM),
-                straightDistance: Distance.CreateFromMeter(0),
-                hasSlope: false,
-                hasTightCorner: false);
+                straightDistance: null,
+                hasSlope: null,
+                hasTightCorner: null);
         }
 
         public static IReadOnlyList<ITrack> GetAll() => _all;

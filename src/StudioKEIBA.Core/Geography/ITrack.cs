@@ -25,16 +25,16 @@ namespace StudioKEIBA
         /// <summary>
         /// 直線の長さ
         /// </summary>
-        IDistance StraightLength { get; }
+        IDistance? StraightLength { get; }
 
         /// <summary>
         /// 直線急坂の有無
         /// </summary>
-        bool HasSlopeInStraight { get; }
+        bool? HasSlopeInStraight { get; }
 
         /// <summary>
         /// 小回りコースか
         /// </summary>
-        bool HasTightCorner { get; }
+        bool? HasTightCorner { get; }
     }
 }

@@ -91,9 +91,6 @@ namespace StudioKEIBA.HorseProfilerApp.Views.ViewModels
             viewModel.Date = result.Race.RaceDate.ToShortDateString();
             viewModel.RaceName = result.Race.RaceName;
             viewModel.RaceTrackName = result.Race.RaceTrack.ToString();
-            viewModel.HasSlope = result.Race.RaceTrack.HasSlopeInStraight ? "〇" : string.Empty;
-            viewModel.HasTightCorner = result.Race.RaceTrack.HasTightCorner ? "〇" : string.Empty;
-            viewModel.HomeStratchIsShort = result.Race.RaceTrack.StraightLength.Meter < 400.0 ? "〇" : string.Empty;
             viewModel.TrackCondition = result.Race.TrackCondition.DisplayName;
             viewModel.Umaban = result.Umaban.ToString();
             viewModel.Wakuban = result.Wakuban.ToString();
@@ -114,6 +111,23 @@ namespace StudioKEIBA.HorseProfilerApp.Views.ViewModels
             {
                 viewModel.UchiSoto = "外枠";
             }
+
+            //急坂
+            if (result.Race.RaceTrack.HasSlopeInStraight.HasValue || result.Race.RaceTrack.HasSlopeInStraight == true)
+            {
+                viewModel.HasSlope = "〇";
+            }
+            //小回り
+            if (result.Race.RaceTrack.HasTightCorner.HasValue || result.Race.RaceTrack.HasTightCorner == true)
+            {
+                viewModel.HasTightCorner = "〇";
+            }
+            // 短直線
+            if (result.Race.RaceTrack.StraightLength != null && result.Race.RaceTrack.StraightLength.Meter < 400.0)
+            {
+                viewModel.HomeStratchIsShort = "〇";
+            }
+
 
             return viewModel;
         }

@@ -20,24 +20,24 @@
         /// <summary>
         /// 直線の長さ
         /// </summary>
-        public IDistance StraightLength { get; }
+        public IDistance? StraightLength { get; }
 
         /// <summary>
         /// 直線急坂の有無
         /// </summary>
-        public bool HasSlopeInStraight { get; }
+        public bool? HasSlopeInStraight { get; }
 
         /// <summary>
         /// 小回りコースか
         /// </summary>
-        public bool HasTightCorner { get; }
+        public bool? HasTightCorner { get; }
 
         /// <summary>
         /// ファクトリメソッド
         /// </summary>
         /// <returns></returns>
         static public ITrack Create(IRaceCourse raceCourse, TrackType trackType, IDistance distance,
-            IDistance straightDistance, bool hasSlope, bool hasTightCorner)
+            IDistance? straightDistance, bool? hasSlope, bool? hasTightCorner)
             => new Track(raceCourse, trackType, distance, straightDistance, hasSlope, hasTightCorner);
 
         public override string ToString()
@@ -48,7 +48,7 @@
         /// 隠蔽コンストラクタ
         /// </summary>
         private Track(IRaceCourse raceCourse, TrackType trackType, IDistance distance,
-            IDistance straightDistance, bool hasSlope, bool hasTightCorner)
+            IDistance? straightDistance, bool? hasSlope, bool? hasTightCorner)
         {
             RaceCourse = raceCourse;
             TrackType = trackType;
