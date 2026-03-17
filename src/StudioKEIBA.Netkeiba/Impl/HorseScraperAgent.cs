@@ -160,7 +160,7 @@ namespace StudioKEIBA.Netkeiba.Impl
                 var track = TrackCatalog.FindOrCreate(raceCourseName, trackType, distance);
 
                 //レース
-                var raceDate = DateTime.Parse(Text(0));
+                var raceDate = DateOnly.Parse(Text(0));
                 var raceNumber = TryInt(3);
                 var raceName = Text(4);
                 var raceUri = new Uri(GetRaceUrl(cells[4]));

@@ -5,7 +5,7 @@
         /// <summary>
         /// 開催日
         /// </summary>
-        public DateTime RaceDate { get; }
+        public DateOnly RaceDate { get; }
 
         /// <summary>
         /// トラック
@@ -58,7 +58,7 @@
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        internal Race(DateTime raceDate, ITrack raceTrack, int? raceNumber, string raceName, Uri raceUri, int horseNum,
+        internal Race(DateOnly raceDate, ITrack raceTrack, int? raceNumber, string raceName, Uri raceUri, int horseNum,
             ITrackCondition condition, string weather, double? first3F, double? last3F)
         {
              RaceDate = raceDate;

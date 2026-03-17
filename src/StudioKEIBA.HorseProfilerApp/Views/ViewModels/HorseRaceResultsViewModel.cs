@@ -84,6 +84,11 @@ namespace StudioKEIBA.HorseProfilerApp.Views.ViewModels
         public string? DistanceRotation { get; private set; }
 
         /// <summary>
+        /// レース間隔
+        /// </summary>
+        public string? RaceInterval { get; private set; }
+
+        /// <summary>
         /// factoryメソッド
         /// </summary>
         static public HorseRaceResultViewModel FromHorseRaceResult(IHorseRaceResult result, IHorseRaceResult? prev)
@@ -126,8 +131,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views.ViewModels
             }
             if (prev == null) return viewModel;
             viewModel.DistanceRotation = result.Race.RaceTrack.ResolveDistanceRotation(prev.Race.RaceTrack);
-
-
+            viewModel.RaceInterval = result.Race.RaceDate.ResolveRaceInterval(prev.Race.RaceDate);
             return viewModel;
         }
     }

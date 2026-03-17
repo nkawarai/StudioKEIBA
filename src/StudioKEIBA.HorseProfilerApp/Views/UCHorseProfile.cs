@@ -191,6 +191,15 @@ namespace StudioKEIBA.HorseProfilerApp.Views
                         Alignment = DataGridViewContentAlignment.MiddleCenter
                     },
                 },
+                new DataGridViewTextBoxColumn
+                {
+                    HeaderText = "間隔",
+                    DataPropertyName = nameof(HorseRaceResultViewModel.RaceInterval),
+                    DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        Alignment = DataGridViewContentAlignment.MiddleCenter
+                    },
+                },
             });
 
             //ソートはしない

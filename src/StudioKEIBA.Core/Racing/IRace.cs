@@ -8,7 +8,7 @@
         /// <summary>
         /// 開催日
         /// </summary>
-        DateTime RaceDate { get; }
+        DateOnly RaceDate { get; }
 
         /// <summary>
         /// トラック
