@@ -19,7 +19,7 @@ namespace StudioKEIBA.Geography
             }
 
             //登録がない競馬場の場合
-            var raceCourse = RaceCourse.Create(raceCourseName, raceCourseName.Substring(0, 2));
+            var raceCourse = RaceCourse.Create(raceCourseName, raceCourseName.Substring(0, 2), TrackTurningDirection.Unknown);
             return Track.Create(
                 raceCourse: raceCourse,
                 trackType: trackType,
