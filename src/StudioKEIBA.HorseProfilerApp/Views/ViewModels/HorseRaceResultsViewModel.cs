@@ -112,11 +112,11 @@ namespace StudioKEIBA.HorseProfilerApp.Views.ViewModels
                 viewModel.UchiSoto = "外枠";
             }
 
-            if (result.Race.RaceTrack.HasSlopeInStraight.HasValue || result.Race.RaceTrack.HasSlopeInStraight == true)
+            if (result.Race.RaceTrack.HasSlopeInStraight.HasValue && result.Race.RaceTrack.HasSlopeInStraight == true)
             {
                 viewModel.HasSlope = "〇";
             }
-            if (result.Race.RaceTrack.HasTightCorner.HasValue || result.Race.RaceTrack.HasTightCorner == true)
+            if (result.Race.RaceTrack.HasTightCorner.HasValue && result.Race.RaceTrack.HasTightCorner == true)
             {
                 viewModel.HasTightCorner = "〇";
             }
