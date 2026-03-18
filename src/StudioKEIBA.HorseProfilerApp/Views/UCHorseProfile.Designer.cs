@@ -33,11 +33,10 @@
             _labelPedigree = new Label();
             _dataGridViewHorseRaceResult = new DataGridView();
             groupBox1 = new GroupBox();
-            this._groupBoxSlope = new GroupBox();
-            _panelRaceStatsSlope = new Panel();
+            _dataGridViewRaceCourseStats = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)_dataGridViewHorseRaceResult).BeginInit();
             groupBox1.SuspendLayout();
-            this._groupBoxSlope.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)_dataGridViewRaceCourseStats).BeginInit();
             SuspendLayout();
             // 
             // _buttonGetHorseProfile
@@ -71,7 +70,7 @@
             // 
             _labelPedigree.AutoSize = true;
             _labelPedigree.Font = new Font("メイリオ", 12F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            _labelPedigree.Location = new Point(21, 74);
+            _labelPedigree.Location = new Point(8, 77);
             _labelPedigree.Margin = new Padding(4, 0, 4, 0);
             _labelPedigree.Name = "_labelPedigree";
             _labelPedigree.Size = new Size(100, 24);
@@ -100,29 +99,20 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "戦歴";
             // 
-            // _groupBoxSlope
+            // _dataGridViewRaceCourseStats
             // 
-            this._groupBoxSlope.Controls.Add(_panelRaceStatsSlope);
-            this._groupBoxSlope.Location = new Point(21, 151);
-            this._groupBoxSlope.Name = "_groupBoxSlope";
-            this._groupBoxSlope.Size = new Size(298, 131);
-            this._groupBoxSlope.TabIndex = 5;
-            this._groupBoxSlope.TabStop = false;
-            this._groupBoxSlope.Text = "急坂コース";
-            // 
-            // _panelRaceStatsSlope
-            // 
-            _panelRaceStatsSlope.Dock = DockStyle.Fill;
-            _panelRaceStatsSlope.Location = new Point(3, 25);
-            _panelRaceStatsSlope.Name = "_panelRaceStatsSlope";
-            _panelRaceStatsSlope.Size = new Size(292, 103);
-            _panelRaceStatsSlope.TabIndex = 0;
+            _dataGridViewRaceCourseStats.BackgroundColor = SystemColors.Control;
+            _dataGridViewRaceCourseStats.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            _dataGridViewRaceCourseStats.Location = new Point(20, 147);
+            _dataGridViewRaceCourseStats.Name = "_dataGridViewRaceCourseStats";
+            _dataGridViewRaceCourseStats.Size = new Size(334, 318);
+            _dataGridViewRaceCourseStats.TabIndex = 6;
             // 
             // UCHorseProfile
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(this._groupBoxSlope);
+            Controls.Add(_dataGridViewRaceCourseStats);
             Controls.Add(groupBox1);
             Controls.Add(_labelPedigree);
             Controls.Add(_labelHorseName);
@@ -134,7 +124,7 @@
             Load += _ucHorseProfileLoaded;
             ((System.ComponentModel.ISupportInitialize)_dataGridViewHorseRaceResult).EndInit();
             groupBox1.ResumeLayout(false);
-            this._groupBoxSlope.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)_dataGridViewRaceCourseStats).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -146,7 +136,6 @@
         private Label _labelPedigree;
         private DataGridView _dataGridViewHorseRaceResult;
         private GroupBox groupBox1;
-        private GroupBox _groupBoxSlope;
-        private Panel _panelRaceStatsSlope;
+        private DataGridView _dataGridViewRaceCourseStats;
     }
 }

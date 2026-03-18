@@ -14,5 +14,14 @@ namespace StudioKEIBA.Geography
         public static readonly IRaceCourse NIIGATA = RaceCourse.Create("新潟競馬場", "新潟", TrackTurningDirection.Left);
         public static readonly IRaceCourse CHUKYO = RaceCourse.Create("中京競馬場", "中京", TrackTurningDirection.Left);
         public static readonly IRaceCourse KOKURA = RaceCourse.Create("小倉競馬場", "小倉", TrackTurningDirection.Right);
+
+        /// <summary>
+        /// 全競馬場情報を返す
+        /// </summary>
+        public static IEnumerable<IRaceCourse> All => new[]
+        {
+            SAPPORO, HAKODATE, FUKUSHIMA, NIIGATA,
+            TOKYO, NAKAYAMA, CHUKYO, KYOTO, HANSHIN, KOKURA
+        };
     }
 }

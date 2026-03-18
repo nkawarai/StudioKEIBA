@@ -1,5 +1,6 @@
 ﻿namespace StudioKEIBA.HorseProfilerApp.Extensions
 {
+    using StudioKEIBA.Geography;
     using StudioKEIBA.Horse;
     using StudioKEIBA.Racing;
     using Views.ViewModels;
@@ -26,16 +27,28 @@
         }
 
         /// <summary>
-        /// 条件ごとのレース成績ViewModelを返す
+        /// 競馬場別成績ViewModelを返す
         /// </summary>
         /// <param name="self"></param>
         /// <returns></returns>
-        static internal RaceStatsViewModel ConvertToRaceStatsViewModel(this IEnumerable<IHorseRaceResult> self)
+        static internal IEnumerable<IRaceStasViewModel> ConvertToRaceCourseStatsVM(this IEnumerable<IHorseRaceResult> self)
         {
-            return new RaceStatsViewModel
-            {
-                SlopeStats = self.Where(x => x.Race.RaceTrack.HasSlopeInStraight == true).ResolveStats(),
-            };
+            return RaceCourseCatalog.All
+                .Select(course => RaceStatsViewModel.Create(course.DisplayName, self.Where(x => x.Race.RaceTrack.RaceCourse.Name == course.Name).ResolveStats()));
+        }
+
+        /// <summary>
+        /// その他さまざまな観点での成績ViewModelを返す
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        static internal IEnumerable<IRaceStasViewModel> ConverToVariousStatsVM(this IEnumerable<IHorseRaceResult> self)
+        {
+            var slopeStats = RaceStatsViewModel.Create("急坂", self.Where(x => x.Race.RaceTrack.HasSlopeInStraight == true).ResolveStats());
+            var titeCournerStats = RaceStatsViewModel.Create("小回り", self.Where(x => x.Race.RaceTrack.HasTightCorner == true).ResolveStats());
+            var shortStraightStats = RaceStatsViewModel.Create("短直線", self.Where(x => x.Race.RaceTrack.StraightLength?.Meter < 400).ResolveStats());
+
+            return new[] {slopeStats, titeCournerStats, shortStraightStats};
         }
 
         /// <summary>

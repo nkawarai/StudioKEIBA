@@ -2,37 +2,92 @@
 
 namespace StudioKEIBA.HorseProfilerApp.Views.ViewModels
 {
-
-    internal class RaceStatsViewModel
+    public interface IRaceStasViewModel
     {
-        /// <summary>
-        /// 急坂コースの成績
-        /// </summary>
-        public IRaceStats? SlopeStats { get; set; }
 
         /// <summary>
-        /// 直線の長いコースの成績
+        /// 項目名
         /// </summary>
-        public IRaceStats? LongStraightStats { get; set; }
+        string ItemName { get; }
 
         /// <summary>
-        /// 距離ローテが「同距離」時の成績
+        /// 合計
         /// </summary>
-        public IRaceStats? SameDistanceRotationStats { get; set; } 
+        int TotalCount { get; }
 
         /// <summary>
-        /// 距離ローテが「短縮」時の成績
+        /// 勝率
         /// </summary>
-        public IRaceStats? ShortenedRotationStats { get; set; } 
+        double WinRate { get; }
 
         /// <summary>
-        /// 距離ローテが「延長」時の成績
+        /// 複勝率
         /// </summary>
-        public IRaceStats? ExtendedRotationStats { get; set; }
+        double Top3Rate { get; }
 
         /// <summary>
-        /// 距離ローテが「馬場替わり」時の成績
+        /// 表示文字列
         /// </summary>
-        public IRaceStats? ChangeTrackStats { get; set; }
+        /// <returns></returns>
+        string StatsString { get; }
+    }
+    
+    /// <summary>
+    /// カテゴリー別成績ViewModel
+    /// </summary>
+    public class RaceStatsViewModel : IRaceStasViewModel
+    {
+        private string _displayString;
+
+        /// <summary>
+        /// 項目名
+        /// </summary>
+        public string ItemName { get; }
+
+        /// <summary>
+        /// 合計
+        /// </summary>
+        public int TotalCount { get; }
+
+        /// <summary>
+        /// 勝率
+        /// </summary>
+        public double WinRate { get; }
+
+        /// <summary>
+        /// 複勝率
+        /// </summary>
+        public double Top3Rate { get; }
+
+        /// <summary>
+        /// 表示文字列
+        /// </summary>
+        /// <returns></returns>
+        public string StatsString => _displayString;
+
+        public string DisplayString() => _displayString;
+
+        public override string ToString() => $"{ItemName} {_displayString}";
+
+        /// <summary>
+        /// ファクトリメソッド
+        /// </summary>
+        /// <param name="itemName"></param>
+        /// <param name="raceStats"></param>
+        /// <returns></returns>
+        static public IRaceStasViewModel Create(string itemName, IRaceStats raceStats)
+            => new RaceStatsViewModel(itemName, raceStats);
+
+        /// <summary>
+        /// 隠蔽コンストラクタ
+        /// </summary>
+        private RaceStatsViewModel(string itemName, IRaceStats raceStats)
+        {
+            ItemName = itemName;
+            TotalCount = raceStats.TotalCount;
+            WinRate = raceStats.WinRate;
+            Top3Rate = raceStats.Top3Rate;
+            _displayString = raceStats.DisplayString();
+        }
     }
 }
