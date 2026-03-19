@@ -52,6 +52,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views
                 _dataGridViewCourseShapeStats.SetRaceStatDataSource(profile.HorseRaceResults.ConvertToCourseShapeStatsVM());
                 _dataGridViewDistanceRotationStats.SetRaceStatDataSource(profile.HorseRaceResults.ConvertToDistanceRotationStatsVM());
                 _dataGridViewSummaryStats.SetRaceStatDataSource(profile.HorseRaceResults.ConvertToSummaryStatsVM());
+                _dataGridViewSeasonStats.SetRaceStatDataSource(profile.HorseRaceResults.ConvertToSeasonStatsVM());
             }
             catch (Exception ex)
             {
@@ -83,6 +84,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views
             _dataGridViewCourseShapeStats.InitForRaceStats("項目", nameof(IRaceStasViewModel.ItemName));
             _dataGridViewDistanceRotationStats.InitForRaceStats("ローテ", nameof(IRaceStasViewModel.ItemName));
             _dataGridViewSummaryStats.InitForRaceStats("項目", nameof(IRaceStasViewModel.ItemName));
+            _dataGridViewSeasonStats.InitForRaceStats("時期", nameof(IRaceStasViewModel.ItemName));
         }
 
         /// <summary>

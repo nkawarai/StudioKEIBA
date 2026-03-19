@@ -37,19 +37,21 @@
             _dataGridViewCourseShapeStats = new DataGridView();
             _dataGridViewDistanceRotationStats = new DataGridView();
             _dataGridViewSummaryStats = new DataGridView();
+            _dataGridViewSeasonStats = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)_dataGridViewHorseRaceResult).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)_dataGridViewRaceCourseStats).BeginInit();
             ((System.ComponentModel.ISupportInitialize)_dataGridViewCourseShapeStats).BeginInit();
             ((System.ComponentModel.ISupportInitialize)_dataGridViewDistanceRotationStats).BeginInit();
             ((System.ComponentModel.ISupportInitialize)_dataGridViewSummaryStats).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)_dataGridViewSeasonStats).BeginInit();
             SuspendLayout();
             // 
             // _buttonGetHorseProfile
             // 
             _buttonGetHorseProfile.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             _buttonGetHorseProfile.Font = new Font("メイリオ", 12F, FontStyle.Regular, GraphicsUnit.Point, 128);
-            _buttonGetHorseProfile.Location = new Point(5, 782);
+            _buttonGetHorseProfile.Location = new Point(5, 866);
             _buttonGetHorseProfile.Margin = new Padding(5, 6, 5, 6);
             _buttonGetHorseProfile.Name = "_buttonGetHorseProfile";
             _buttonGetHorseProfile.Size = new Size(262, 55);
@@ -98,7 +100,7 @@
             // 
             groupBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             groupBox1.Controls.Add(_dataGridViewHorseRaceResult);
-            groupBox1.Location = new Point(5, 487);
+            groupBox1.Location = new Point(5, 571);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(1191, 286);
             groupBox1.TabIndex = 4;
@@ -109,7 +111,7 @@
             // 
             _dataGridViewRaceCourseStats.BackgroundColor = SystemColors.Control;
             _dataGridViewRaceCourseStats.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            _dataGridViewRaceCourseStats.Location = new Point(397, 144);
+            _dataGridViewRaceCourseStats.Location = new Point(8, 255);
             _dataGridViewRaceCourseStats.Name = "_dataGridViewRaceCourseStats";
             _dataGridViewRaceCourseStats.Size = new Size(383, 280);
             _dataGridViewRaceCourseStats.TabIndex = 6;
@@ -118,7 +120,7 @@
             // 
             _dataGridViewCourseShapeStats.BackgroundColor = SystemColors.Control;
             _dataGridViewCourseShapeStats.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            _dataGridViewCourseShapeStats.Location = new Point(8, 263);
+            _dataGridViewCourseShapeStats.Location = new Point(397, 280);
             _dataGridViewCourseShapeStats.Name = "_dataGridViewCourseShapeStats";
             _dataGridViewCourseShapeStats.Size = new Size(383, 155);
             _dataGridViewCourseShapeStats.TabIndex = 7;
@@ -127,7 +129,7 @@
             // 
             _dataGridViewDistanceRotationStats.BackgroundColor = SystemColors.Control;
             _dataGridViewDistanceRotationStats.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            _dataGridViewDistanceRotationStats.Location = new Point(786, 144);
+            _dataGridViewDistanceRotationStats.Location = new Point(397, 144);
             _dataGridViewDistanceRotationStats.Name = "_dataGridViewDistanceRotationStats";
             _dataGridViewDistanceRotationStats.Size = new Size(383, 130);
             _dataGridViewDistanceRotationStats.TabIndex = 8;
@@ -141,10 +143,20 @@
             _dataGridViewSummaryStats.Size = new Size(383, 105);
             _dataGridViewSummaryStats.TabIndex = 9;
             // 
+            // _dataGridViewSeasonStats
+            // 
+            _dataGridViewSeasonStats.BackgroundColor = SystemColors.Control;
+            _dataGridViewSeasonStats.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            _dataGridViewSeasonStats.Location = new Point(786, 144);
+            _dataGridViewSeasonStats.Name = "_dataGridViewSeasonStats";
+            _dataGridViewSeasonStats.Size = new Size(383, 130);
+            _dataGridViewSeasonStats.TabIndex = 10;
+            // 
             // UCHorseProfile
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(_dataGridViewSeasonStats);
             Controls.Add(_dataGridViewSummaryStats);
             Controls.Add(_dataGridViewDistanceRotationStats);
             Controls.Add(_dataGridViewCourseShapeStats);
@@ -156,7 +168,7 @@
             Font = new Font("メイリオ", 11F, FontStyle.Regular, GraphicsUnit.Point, 128);
             Margin = new Padding(5, 6, 5, 6);
             Name = "UCHorseProfile";
-            Size = new Size(1199, 842);
+            Size = new Size(1199, 926);
             Load += _ucHorseProfileLoaded;
             ((System.ComponentModel.ISupportInitialize)_dataGridViewHorseRaceResult).EndInit();
             groupBox1.ResumeLayout(false);
@@ -164,6 +176,7 @@
             ((System.ComponentModel.ISupportInitialize)_dataGridViewCourseShapeStats).EndInit();
             ((System.ComponentModel.ISupportInitialize)_dataGridViewDistanceRotationStats).EndInit();
             ((System.ComponentModel.ISupportInitialize)_dataGridViewSummaryStats).EndInit();
+            ((System.ComponentModel.ISupportInitialize)_dataGridViewSeasonStats).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -179,5 +192,6 @@
         private DataGridView _dataGridViewCourseShapeStats;
         private DataGridView _dataGridViewDistanceRotationStats;
         private DataGridView _dataGridViewSummaryStats;
+        private DataGridView _dataGridViewSeasonStats;
     }
 }

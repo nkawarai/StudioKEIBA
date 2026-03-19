@@ -134,6 +134,35 @@
         }
 
         /// <summary>
+        /// 季節ごとの成績ViewModelを返す
+        /// </summary>
+        static internal IEnumerable<IRaceStasViewModel> ConvertToSeasonStatsVM(this IEnumerable<IHorseRaceResult> self)
+        {
+            var winter = RaceStatsViewModel.Create(
+                "12月～2月",
+                self.Where(x => x.Race.RaceDate.Month == 12 || x.Race.RaceDate.Month == 1 || x.Race.RaceDate.Month == 2)
+                .ResolveStats());
+
+            var spring = RaceStatsViewModel.Create(
+                "3月～5月",
+                self.Where(x => x.Race.RaceDate.Month == 3 || x.Race.RaceDate.Month == 4 || x.Race.RaceDate.Month == 5)
+                .ResolveStats());
+
+            var summer = RaceStatsViewModel.Create(
+                "6月～8月",
+                self.Where(x => x.Race.RaceDate.Month == 6 || x.Race.RaceDate.Month == 7 || x.Race.RaceDate.Month == 8)
+                .ResolveStats());
+
+
+            var autumn = RaceStatsViewModel.Create(
+                "9月～11月",
+                self.Where(x => x.Race.RaceDate.Month == 9 || x.Race.RaceDate.Month == 10 || x.Race.RaceDate.Month == 11)
+                .ResolveStats());
+
+            return new[] {winter, spring, summer, autumn };
+        }
+
+        /// <summary>
         /// 着順を集計する
         /// </summary>
         static internal IRaceStats ResolveStats(this IEnumerable<IHorseRaceResult> results)
