@@ -13,6 +13,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views
         {
             InitializeComponent();
             WindowState = FormWindowState.Maximized;
+            Text = $"StudioKEIBA 競走馬プロファイリングツール  {AppVersion.DisplayString}";
 
             _appServices = appServices;
             var ucHorseProfile = new UCHorseProfile(appServices);
