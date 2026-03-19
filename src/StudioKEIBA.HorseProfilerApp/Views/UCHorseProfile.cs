@@ -1,8 +1,8 @@
 ﻿using Serilog;
+using StudioKEIBA.Horse;
 using StudioKEIBA.HorseProfilerApp.Extensions;
 using StudioKEIBA.HorseProfilerApp.Services;
 using StudioKEIBA.HorseProfilerApp.Views.ViewModels;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace StudioKEIBA.HorseProfilerApp.Views
 {
@@ -78,13 +78,20 @@ namespace StudioKEIBA.HorseProfilerApp.Views
 
         private void InitDataGridView()
         {
-            //各DataGridViewの初期化
             InitHorseRaceResultDataGridView();
             _dataGridViewRaceCourseStats.InitForRaceStats("競馬場", nameof(IRaceStasViewModel.ItemName));
             _dataGridViewCourseShapeStats.InitForRaceStats("項目", nameof(IRaceStasViewModel.ItemName));
             _dataGridViewDistanceRotationStats.InitForRaceStats("ローテ", nameof(IRaceStasViewModel.ItemName));
             _dataGridViewSummaryStats.InitForRaceStats("項目", nameof(IRaceStasViewModel.ItemName));
             _dataGridViewSeasonStats.InitForRaceStats("時期", nameof(IRaceStasViewModel.ItemName));
+
+            var emptyHorseRaceResults = new List<IHorseRaceResult>(); //UI初期化用の空データ
+            _dataGridViewRaceCourseStats.SetRaceStatDataSource(emptyHorseRaceResults.ConvertToRaceCourseStatsVM());
+            _dataGridViewCourseShapeStats.SetRaceStatDataSource(emptyHorseRaceResults.ConvertToCourseShapeStatsVM());
+            _dataGridViewDistanceRotationStats.SetRaceStatDataSource(emptyHorseRaceResults.ConvertToDistanceRotationStatsVM());
+            _dataGridViewSummaryStats.SetRaceStatDataSource(emptyHorseRaceResults.ConvertToSummaryStatsVM());
+            _dataGridViewSeasonStats.SetRaceStatDataSource(emptyHorseRaceResults.ConvertToSeasonStatsVM());
+
         }
 
         /// <summary>

@@ -111,7 +111,7 @@
             // 
             _dataGridViewRaceCourseStats.BackgroundColor = SystemColors.Control;
             _dataGridViewRaceCourseStats.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            _dataGridViewRaceCourseStats.Location = new Point(8, 255);
+            _dataGridViewRaceCourseStats.Location = new Point(5, 280);
             _dataGridViewRaceCourseStats.Name = "_dataGridViewRaceCourseStats";
             _dataGridViewRaceCourseStats.Size = new Size(383, 280);
             _dataGridViewRaceCourseStats.TabIndex = 6;
