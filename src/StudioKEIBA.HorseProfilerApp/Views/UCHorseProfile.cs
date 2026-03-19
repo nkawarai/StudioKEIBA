@@ -44,8 +44,8 @@ namespace StudioKEIBA.HorseProfilerApp.Views
                 _labelHorseName.Text = $"  {profile.Name}";
                 _labelPedigree.Text = $"父:{profile.Pedigree.Father.HorseName}  母父:{profile.Pedigree.MotherFather.HorseName}";
                 _dataGridViewHorseRaceResult.DataSource = profile.HorseRaceResults.ConvertToHorseRaceResultViewModels();
-                _dataGridViewHorseRaceResult.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
                 _dataGridViewHorseRaceResult.Visible = true;
+                _dataGridViewHorseRaceResult.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
                 //集計と結果表示
                 _dataGridViewRaceCourseStats.SetRaceStatDataSource(profile.HorseRaceResults.ConvertToRaceCourseStatsVM());
