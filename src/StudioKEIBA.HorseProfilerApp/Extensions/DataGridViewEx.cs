@@ -29,6 +29,7 @@ namespace StudioKEIBA.HorseProfilerApp.Extensions
                 {
                     HeaderText = categoryName,
                     DataPropertyName = categoryPropertyName,
+                    Width = 120,
                     DefaultCellStyle = new DataGridViewCellStyle
                     {
                         Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -38,6 +39,7 @@ namespace StudioKEIBA.HorseProfilerApp.Extensions
                 {
                     HeaderText = "着別度数",
                     DataPropertyName = nameof(IRaceStasViewModel.StatsString),
+                    Width = 100,
                     DefaultCellStyle = new DataGridViewCellStyle
                     {
                         Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -47,9 +49,10 @@ namespace StudioKEIBA.HorseProfilerApp.Extensions
                 {
                     HeaderText = "勝率",
                     DataPropertyName = nameof(IRaceStasViewModel.WinRate),
+                    Width = 80,
                     DefaultCellStyle = new DataGridViewCellStyle
                     {
-                        Alignment = DataGridViewContentAlignment.MiddleCenter,
+                        Alignment = DataGridViewContentAlignment.MiddleRight,
                         Format = "P1"
                     }
                 },
@@ -57,9 +60,10 @@ namespace StudioKEIBA.HorseProfilerApp.Extensions
                 {
                     HeaderText = "複勝率",
                     DataPropertyName = nameof(IRaceStasViewModel.Top3Rate),
+                    Width = 80,
                     DefaultCellStyle = new DataGridViewCellStyle
                     {
-                        Alignment = DataGridViewContentAlignment.MiddleCenter,
+                        Alignment = DataGridViewContentAlignment.MiddleRight,
                         Format = "P1"
                     }
                 },
@@ -83,7 +87,6 @@ namespace StudioKEIBA.HorseProfilerApp.Extensions
         static internal void SetRaceStatDataSource(this DataGridView self, IEnumerable<IRaceStasViewModel> raceStatsVM)
         {
             self.DataSource = raceStatsVM.ToList();
-            self.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
     }
 }

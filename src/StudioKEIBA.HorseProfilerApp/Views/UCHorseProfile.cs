@@ -46,6 +46,9 @@ namespace StudioKEIBA.HorseProfilerApp.Views
 
                 //集計と結果表示
                 _dataGridViewRaceCourseStats.SetRaceStatDataSource(profile.HorseRaceResults.ConvertToRaceCourseStatsVM());
+                _dataGridViewCourseShapeStats.SetRaceStatDataSource(profile.HorseRaceResults.ConvertToCourseShapeStatsVM());
+                _dataGridViewDistanceRotationStats.SetRaceStatDataSource(profile.HorseRaceResults.ConvertToDistanceRotationStatsVM());
+                _dataGridViewSummaryStats.SetRaceStatDataSource(profile.HorseRaceResults.ConvertToSummaryStatsVM());
             }
             catch (Exception ex)
             {
@@ -68,10 +71,12 @@ namespace StudioKEIBA.HorseProfilerApp.Views
             _labelHorseName.Text = "競走馬情報を取得してください";
             _labelPedigree.Text = string.Empty;
 
-            InitHorseRaceResultDataGridView();
-
             //各DataGridViewの初期化
+            InitHorseRaceResultDataGridView();
             _dataGridViewRaceCourseStats.InitForRaceStats("競馬場", nameof(IRaceStasViewModel.ItemName));
+            _dataGridViewCourseShapeStats.InitForRaceStats("項目", nameof(IRaceStasViewModel.ItemName));
+            _dataGridViewDistanceRotationStats.InitForRaceStats("ローテ", nameof(IRaceStasViewModel.ItemName));
+            _dataGridViewSummaryStats.InitForRaceStats("項目", nameof(IRaceStasViewModel.ItemName));
         }
 
         /// <summary>

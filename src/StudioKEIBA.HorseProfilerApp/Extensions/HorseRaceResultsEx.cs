@@ -27,6 +27,26 @@
         }
 
         /// <summary>
+        /// 総合成績ViewModelを返す
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        static internal IEnumerable<IRaceStasViewModel> ConvertToSummaryStatsVM(this IEnumerable<IHorseRaceResult> self)
+        {
+            var all = RaceStatsViewModel.Create("全成績", self.ResolveStats());
+            var turf  = RaceStatsViewModel.Create(
+                "芝",
+                self.Where(x => x.Race.RaceTrack.TrackType == TrackType.芝)
+                .ResolveStats());
+            var durt = RaceStatsViewModel.Create(
+                "ダート",
+                self.Where(x => x.Race.RaceTrack.TrackType == TrackType.ダ)
+                .ResolveStats());
+
+            return new[] {all, turf, durt};
+        }
+
+        /// <summary>
         /// 競馬場別成績ViewModelを返す
         /// </summary>
         /// <param name="self"></param>
@@ -38,17 +58,79 @@
         }
 
         /// <summary>
-        /// その他さまざまな観点での成績ViewModelを返す
+        /// コース形態での成績ViewModelを返す
         /// </summary>
         /// <param name="self"></param>
         /// <returns></returns>
-        static internal IEnumerable<IRaceStasViewModel> ConverToVariousStatsVM(this IEnumerable<IHorseRaceResult> self)
+        static internal IEnumerable<IRaceStasViewModel> ConvertToCourseShapeStatsVM(this IEnumerable<IHorseRaceResult> self)
         {
-            var slopeStats = RaceStatsViewModel.Create("急坂", self.Where(x => x.Race.RaceTrack.HasSlopeInStraight == true).ResolveStats());
-            var titeCournerStats = RaceStatsViewModel.Create("小回り", self.Where(x => x.Race.RaceTrack.HasTightCorner == true).ResolveStats());
-            var shortStraightStats = RaceStatsViewModel.Create("短直線", self.Where(x => x.Race.RaceTrack.StraightLength?.Meter < 400).ResolveStats());
+            var leftTurn = RaceStatsViewModel.Create(
+                "左回り",
+                self.Where(x => x.Race.RaceTrack.RaceCourse.TurningDirection == TrackTurningDirection.Left)
+                .ResolveStats());
 
-            return new[] {slopeStats, titeCournerStats, shortStraightStats};
+            var rightTurn = RaceStatsViewModel.Create(
+                "右回り",
+                self.Where(x => x.Race.RaceTrack.RaceCourse.TurningDirection == TrackTurningDirection.Right)
+                .ResolveStats());
+
+            var slopeStats = RaceStatsViewModel.Create(
+                "急坂",
+                self.Where(x => x.Race.RaceTrack.HasSlopeInStraight == true)
+                .ResolveStats());
+
+            var titeCournerStats = RaceStatsViewModel.Create(
+                "小回り",
+                self.Where(x => x.Race.RaceTrack.HasTightCorner == true)
+                .ResolveStats());
+
+            var shortStraightStats = RaceStatsViewModel.Create(
+                "短直線",
+                self.Where(x => x.Race.RaceTrack.StraightLength?.Meter < 400)
+                .ResolveStats());
+
+            return new[] {leftTurn, rightTurn, slopeStats, titeCournerStats, shortStraightStats};
+        }
+
+        /// <summary>
+        /// ローテごとの成績ViewModelを返す
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        static internal IEnumerable<IRaceStasViewModel> ConvertToDistanceRotationStatsVM(this IEnumerable<IHorseRaceResult> self)
+        {
+            var same = new List<IHorseRaceResult>();
+            var extended = new List<IHorseRaceResult>();
+            var shortened = new List<IHorseRaceResult>();
+            var trackChanged = new List<IHorseRaceResult>();
+            for (var i = 0; i < self.Count() - 1; i++) //前走比較なのでループ回数はレコード数より1減らす
+            {
+                var prevTrack = self.ElementAt(i + 1).Race.RaceTrack;
+                var rotationName = self.ElementAt(i).Race.RaceTrack.ResolveDistanceRotation(prevTrack);
+                if (rotationName == TrackEx.SAME)
+                {
+                    same.Add(self.ElementAt(i));
+                }
+                else if (rotationName == TrackEx.EXTENDED)
+                {
+                    extended.Add(self.ElementAt(i));
+                }
+                else if (rotationName == TrackEx.SHORTENED)
+                {
+                    shortened.Add(self.ElementAt(i));
+                }
+                else if (rotationName == TrackEx.CHANGE_TRACK)
+                {
+                    trackChanged.Add(self.ElementAt(i));
+                }
+            }
+
+            var sameStatsVM = RaceStatsViewModel.Create("同距離", same.ResolveStats());
+            var shortenedStatsVM = RaceStatsViewModel.Create("短縮", shortened.ResolveStats());
+            var extendedStatsVM = RaceStatsViewModel.Create("延長", extended.ResolveStats());
+            var trackChangedVM = RaceStatsViewModel.Create("馬場替わり", trackChanged.ResolveStats());
+
+            return new[] {sameStatsVM, shortenedStatsVM, extendedStatsVM, trackChangedVM };
         }
 
         /// <summary>
