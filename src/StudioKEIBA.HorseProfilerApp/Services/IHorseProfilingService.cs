@@ -18,6 +18,6 @@ namespace StudioKEIBA.HorseProfilerApp.Services
         /// 競走馬プロファイリングサービス
         /// </summary>
         /// <param name="horseID"></param>
-        Task<IHorseProfile> MakeProfile(string horseID);
+        Task<IHorseProfile> MakeProfile(string horseID, IProgressDialog progressDialog);
     }
 }

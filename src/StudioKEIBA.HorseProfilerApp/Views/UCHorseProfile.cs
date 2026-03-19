@@ -28,7 +28,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views
         /// <param name="e"></param>
         async private void _buttonGetHorseProfile_Click(object sender, EventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
+            using var progressDlg = new FormProgress();
             try
             {
                 string horseID;
@@ -39,8 +39,9 @@ namespace StudioKEIBA.HorseProfilerApp.Views
                 }
                 if (string.IsNullOrWhiteSpace(horseID)) return;
 
-                var profile = await _appServices.HorseProfilingService.MakeProfile(horseID);
-
+                progressDlg.Show(this);
+                var profile = await _appServices.HorseProfilingService.MakeProfile(horseID, progressDlg);
+                progressDlg.UpdateMessage("戦歴をプロファイリングしています...");
                 _labelHorseName.Text = $"  {profile.Name}";
                 _labelPedigree.Text = $"父:{profile.Pedigree.Father.HorseName}  母父:{profile.Pedigree.MotherFather.HorseName}";
                 _dataGridViewHorseRaceResult.DataSource = profile.HorseRaceResults.ConvertToHorseRaceResultViewModels();
@@ -54,6 +55,10 @@ namespace StudioKEIBA.HorseProfilerApp.Views
                 _dataGridViewSummaryStats.SetRaceStatDataSource(profile.HorseRaceResults.ConvertToSummaryStatsVM());
                 _dataGridViewSeasonStats.SetRaceStatDataSource(profile.HorseRaceResults.ConvertToSeasonStatsVM());
             }
+            catch (OperationCanceledException)
+            {
+                // キャンセル時は何もしない
+            }
             catch (Exception ex)
             {
                 Message.ShowErrorMessage(this, $"予期せぬエラーが発生しました。\n\n{ex}");
@@ -61,7 +66,7 @@ namespace StudioKEIBA.HorseProfilerApp.Views
             }
             finally
             {
-                Cursor = Cursors.Default;
+                progressDlg.Close();
             }
         }
 
