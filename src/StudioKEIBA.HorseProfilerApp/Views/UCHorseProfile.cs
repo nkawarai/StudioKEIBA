@@ -2,6 +2,7 @@
 using StudioKEIBA.HorseProfilerApp.Extensions;
 using StudioKEIBA.HorseProfilerApp.Services;
 using StudioKEIBA.HorseProfilerApp.Views.ViewModels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace StudioKEIBA.HorseProfilerApp.Views
 {
@@ -16,6 +17,8 @@ namespace StudioKEIBA.HorseProfilerApp.Views
         {
             InitializeComponent();
             _appServices = appServices;
+
+            InitDataGridView();
         }
 
         /// <summary>
@@ -70,7 +73,10 @@ namespace StudioKEIBA.HorseProfilerApp.Views
         {
             _labelHorseName.Text = "競走馬情報を取得してください";
             _labelPedigree.Text = string.Empty;
+        }
 
+        private void InitDataGridView()
+        {
             //各DataGridViewの初期化
             InitHorseRaceResultDataGridView();
             _dataGridViewRaceCourseStats.InitForRaceStats("競馬場", nameof(IRaceStasViewModel.ItemName));

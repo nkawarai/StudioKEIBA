@@ -111,7 +111,7 @@
             _dataGridViewRaceCourseStats.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridViewRaceCourseStats.Location = new Point(397, 144);
             _dataGridViewRaceCourseStats.Name = "_dataGridViewRaceCourseStats";
-            _dataGridViewRaceCourseStats.Size = new Size(383, 281);
+            _dataGridViewRaceCourseStats.Size = new Size(383, 280);
             _dataGridViewRaceCourseStats.TabIndex = 6;
             // 
             // _dataGridViewCourseShapeStats
@@ -120,7 +120,7 @@
             _dataGridViewCourseShapeStats.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridViewCourseShapeStats.Location = new Point(8, 263);
             _dataGridViewCourseShapeStats.Name = "_dataGridViewCourseShapeStats";
-            _dataGridViewCourseShapeStats.Size = new Size(383, 218);
+            _dataGridViewCourseShapeStats.Size = new Size(383, 155);
             _dataGridViewCourseShapeStats.TabIndex = 7;
             // 
             // _dataGridViewDistanceRotationStats
@@ -129,7 +129,7 @@
             _dataGridViewDistanceRotationStats.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridViewDistanceRotationStats.Location = new Point(786, 144);
             _dataGridViewDistanceRotationStats.Name = "_dataGridViewDistanceRotationStats";
-            _dataGridViewDistanceRotationStats.Size = new Size(383, 183);
+            _dataGridViewDistanceRotationStats.Size = new Size(383, 130);
             _dataGridViewDistanceRotationStats.TabIndex = 8;
             // 
             // _dataGridViewSummaryStats
@@ -138,7 +138,7 @@
             _dataGridViewSummaryStats.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             _dataGridViewSummaryStats.Location = new Point(8, 144);
             _dataGridViewSummaryStats.Name = "_dataGridViewSummaryStats";
-            _dataGridViewSummaryStats.Size = new Size(383, 113);
+            _dataGridViewSummaryStats.Size = new Size(383, 105);
             _dataGridViewSummaryStats.TabIndex = 9;
             // 
             // UCHorseProfile
