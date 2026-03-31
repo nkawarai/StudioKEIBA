@@ -1,4 +1,5 @@
 ﻿using StudioKEIBA.HorseProfilerApp.Views.ViewModels;
+using System.Runtime.CompilerServices;
 
 namespace StudioKEIBA.HorseProfilerApp.Extensions
 {
@@ -29,7 +30,7 @@ namespace StudioKEIBA.HorseProfilerApp.Extensions
                 {
                     HeaderText = categoryName,
                     DataPropertyName = categoryPropertyName,
-                    Width = 120,
+                    Width = self.ScaleWidth(120),
                     DefaultCellStyle = new DataGridViewCellStyle
                     {
                         Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -39,7 +40,7 @@ namespace StudioKEIBA.HorseProfilerApp.Extensions
                 {
                     HeaderText = "着別度数",
                     DataPropertyName = nameof(IRaceStasViewModel.StatsString),
-                    Width = 100,
+                    Width = self.ScaleWidth(100),
                     DefaultCellStyle = new DataGridViewCellStyle
                     {
                         Alignment = DataGridViewContentAlignment.MiddleCenter
@@ -49,7 +50,7 @@ namespace StudioKEIBA.HorseProfilerApp.Extensions
                 {
                     HeaderText = "勝率",
                     DataPropertyName = nameof(IRaceStasViewModel.WinRate),
-                    Width = 80,
+                    Width = self.ScaleWidth(80),
                     DefaultCellStyle = new DataGridViewCellStyle
                     {
                         Alignment = DataGridViewContentAlignment.MiddleRight,
@@ -60,7 +61,7 @@ namespace StudioKEIBA.HorseProfilerApp.Extensions
                 {
                     HeaderText = "複勝率",
                     DataPropertyName = nameof(IRaceStasViewModel.Top3Rate),
-                    Width = 80,
+                    Width = self.ScaleWidth(80),
                     DefaultCellStyle = new DataGridViewCellStyle
                     {
                         Alignment = DataGridViewContentAlignment.MiddleRight,

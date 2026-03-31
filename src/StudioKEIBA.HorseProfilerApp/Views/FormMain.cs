@@ -12,7 +12,6 @@ namespace StudioKEIBA.HorseProfilerApp.Views
         public FormMain(IAppServices appServices)
         {
             InitializeComponent();
-            WindowState = FormWindowState.Maximized;
             Text = $"StudioKEIBA 競走馬プロファイリングツール  {AppVersion.DisplayString}";
 
             _appServices = appServices;
